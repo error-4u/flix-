@@ -31,7 +31,7 @@ return <div style={{
         <Button variant='contained'onClick={() => {
 
             function callback2(data){
-                localStorage.setItem("token", data.token)
+                alert("course added")
             }
             function callback1(res){
                 res.json().then(callback2)
