@@ -42,6 +42,7 @@ export default function Header() {
     localStorage.setItem("token", null);
     setLoggedIn(false);
     setUsername('');
+    navigate("/signup")
   };
 
   return (

@@ -1,63 +1,62 @@
+/* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-key */
-/* eslint-disable react/jsx-no-undef */
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import React, { useEffect, useState } from 'react'
 
-// THIS WILL GET ALL THE COURSES 
+// THIS WILL GET INDIVIDUAL COURSES
+ 
+function Course() {
 
-function Courses() {
-    const [courses , setCourses] = useState([]);
-
-    useEffect(() => {
-       function callback2(data){
-        console.log(data.courses);
-        setCourses(data.courses);
-
-       }
-       function callback1(res){
+let { courseId } = useParams();
+const [courses, setCourses] = useState("");
+useEffect(() => {
+    function callback2(data){
+        setCourses(data.courses)
+    }
+     function callback(res){
         res.json().then(callback2)
-
-       }
-      fetch("http://localhost:3000/admin/courses",{
+     }
+    fetch("http://localhost:3000/admin/courses", {
         method: "GET",
         headers: {
-            "authorization" : "Bearer " + localStorage.getItem("token")
+          "authorization" : "Bearer " + localStorage.getItem("token")
         }
-      }).then(callback1)
-    }, [])
-  return (
-    <div style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
-        
-        {courses.map(course => {
-         return <Course course={course}/> }
-         
+    }).then(callback)
+}, []);
 
-        )}
-      
-    </div>
-  )
+
+let course = null;
+for (let i = 0; i < courses.length; i++) {
+    if(courses[i].id == courseId){
+    course = courses[i];
+    }
+    
 }
 
- export function Course(props){
-  return (
- 
+if(!course){
+    return <div>
+        error course
+    </div>
+}
+function GetCourse(props){
+   
     <Card sx={{ maxWidth: 345, marginTop:"20px", backgroundColor:"yellow", marginLeft:"10px"}}>
       <CardMedia
         sx={{ height: 140, backgroundColor:"red"}}
-        image={props.course.imagelink} 
+        image={course.imagelink} 
        
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.course.title}
+          {/* {course.title} */}
         </Typography>
         <Typography variant="body2" color="text.secondary">
      
@@ -72,9 +71,14 @@ function Courses() {
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
- 
-  );
+
+}
+  return (
+    <div>
+   <GetCourse course = {course}/>
+  </div>
+  )
+
 }
 
-
-export default Courses;
+export default Course;

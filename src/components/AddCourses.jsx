@@ -7,6 +7,7 @@ import { useState } from 'react';
 function AddCourses(){
 const [title , setTitle] = useState("");
 const [description , setDescription] = useState("");
+const [image, setimg] = useState("");
 
 
 
@@ -27,6 +28,10 @@ return <div style={{
         <TextField variant='outlined' id='description' label= 'description' fullWidth = {true} onChange={(e) => {
             setDescription(e.target.value)
         }}/>
+        <br /><br />
+        <TextField variant='outlined' id='imglink' label='image link' fullWidth = {true} onChange={(e) => {
+            setimg(e.target.value)
+        }}/>
         <br /> <br />
         <Button variant='contained'onClick={() => {
 
@@ -41,7 +46,7 @@ return <div style={{
                 body : JSON.stringify({
                     title : title,
                     description : description,
-                    imagelink : "",
+                    imagelink : image,
                     published : true
                 }),
                 headers : {
