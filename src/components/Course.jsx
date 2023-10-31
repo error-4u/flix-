@@ -10,10 +10,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { TextField } from '@mui/material';
 
-// THIS WILL GET INDIVIDUAL COURSES
+// THIS WILL GET INDIVIDUAL COURSE
  
 function Course() {
+
+    console.log("from course");
 
 let { courseId } = useParams();
 const [courses, setCourses] = useState("");
@@ -46,8 +49,97 @@ if(!course){
         error course
     </div>
 }
+
+// THIS WILL UPDATE INDIVIDUAL COURSE
+
+function UpdateCourse(props){
+    console.log("from Update course");
+    const [title , setTitle] = useState("");
+    const [description , setDescription] = useState("");
+    const [image, setimg] = useState("");
+    const course = props.course;
+    
+    
+    return <div style={{
+        marginTop : 200
+    
+    }}> 
+    <center>
+        <Card variant="outlined" style={{
+            width : 400,
+            padding: "3rem"
+          
+        }}> 
+            <Typography>Update course details</Typography>
+            <TextField variant="outlined" id='title' label= 'title' fullWidth = {true} onChange={(e) => {
+                setTitle(e.target.value)
+            }}/>
+            <br /><br />
+            <TextField variant='outlined' id='description' label= 'description' fullWidth = {true} onChange={(e) => {
+                setDescription(e.target.value)
+            }}/>
+            <br /><br />
+            <TextField variant='outlined' id='imglink' label='image link' fullWidth = {true} onChange={(e) => {
+                setimg(e.target.value)
+            }}/>
+            <br /> <br />
+            <Button variant='contained'onClick={() => {
+    
+                function callback2(data){
+                  
+                    let UpdateCourses = [];
+                    // alert("course updated")
+                    for (let i = 0; i < props.courses.length; i++) {
+                        if(props.courses[i].id == course.id){
+                            UpdateCourses.push ({
+                                id: course.id,
+                                title: title,
+                                description:description,
+                                imagelink: image
+
+                            })
+                        }
+                        else{
+                            UpdateCourses.push(props.courses[i]);
+                        }
+                        
+                    }
+                    props.setCourses(UpdateCourses)
+
+                }
+                function callback1(res){
+                    res.json().then(callback2)
+                }
+                fetch("http://localhost:3000/admin/courses/" + course.id, {
+                    method: "PUT",
+                    body : JSON.stringify({
+                        title : title,
+                        description : description,
+                        imagelink : image,
+                        published : true
+                    }),
+                    headers : {
+                        "Content-type" : "application/json",
+                        "authorization" : " Bearer " + localStorage.getItem("token") 
+                    }
+                }).then(callback1)
+             
+            }}>Update course</Button>
+    
+        </Card>
+     </center>
+    </div>
+        
+    
+}
+
+// THIS WILL RENDER ALL THE INDIVIDUAL COURSE 
+
 function GetCourse(props){
+    const course = props.course;
+    console.log("from get course");
    
+    return <div >
     <Card sx={{ maxWidth: 345, marginTop:"20px", backgroundColor:"yellow", marginLeft:"10px"}}>
       <CardMedia
         sx={{ height: 140, backgroundColor:"red"}}
@@ -56,13 +148,14 @@ function GetCourse(props){
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {/* {course.title} */}
+          {course.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
      
        <br />
-       {props.course.description}
+       {course.description}
        <br />
+
       
         </Typography>
       </CardContent>
@@ -71,11 +164,14 @@ function GetCourse(props){
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
+    </div>
 
 }
   return (
-    <div>
+    <div style={{display:"flex",justifyContent:"center"}}>
    <GetCourse course = {course}/>
+   
+   <UpdateCourse courses= {courses} course = {course} setCourses={setCourses}/>
   </div>
   )
 
