@@ -8,6 +8,7 @@ function AddCourses(){
 const [title , setTitle] = useState("");
 const [description , setDescription] = useState("");
 const [image, setimg] = useState("");
+const [price, setPrice] = useState("")
 
 
 
@@ -32,6 +33,10 @@ return <div style={{
         <TextField variant='outlined' id='imglink' label='image link' fullWidth = {true} onChange={(e) => {
             setimg(e.target.value)
         }}/>
+        <br /><br />
+        <TextField variant='outlined' id='price' label='price' fullWidth = {true} onChange={(e) => {
+            setPrice(e.target.value)
+        }}/>
         <br /> <br />
         <Button variant='contained'onClick={() => {
 
@@ -47,7 +52,8 @@ return <div style={{
                     title : title,
                     description : description,
                     imagelink : image,
-                    published : true
+                    published : true,
+                    price
                 }),
                 headers : {
                     "Content-type" : "application/json",

@@ -16,6 +16,10 @@ const router = express.Router();
 
 router.get("/me" , authenticateJwt , (req , res) => {
     res.json({username: req.user.username})
+    if(!ADMINS){
+      res.status(403).json({msg:"Admin doesn't exist"})
+      return
+    }
   })
 
 router.post('/signup',  (req, res) => {
