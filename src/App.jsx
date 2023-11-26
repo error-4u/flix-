@@ -15,7 +15,7 @@ import axios from 'axios'
 
 function App() {
 
-  const [userEmail, setUserEmail] = useState("")
+  const [userEmail, setUserEmail] = useState(null)
 
   const init = async () => {
     const response = await axios.get('http://localhost:3000/admin/me', {
@@ -29,7 +29,7 @@ function App() {
   }
 
   useEffect(() => {
-    init()
+    init();
   },[])
 
   return (

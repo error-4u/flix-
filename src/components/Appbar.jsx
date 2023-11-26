@@ -30,13 +30,6 @@ export default function Appbar({userEmail, setUserEmail}) {
       });
   }, []);
 
-  if(userEmail){
-    return <div style={{variant: "contained"}} onClick={() => {
-      localStorage.setItem("token", null);
-      setUserEmail(null);
-    }}>logout</div>
-  }
-
   const handleLogin = () => {
     navigate('/login');
   };
@@ -52,6 +45,27 @@ export default function Appbar({userEmail, setUserEmail}) {
     setUsername('');
     navigate("/signup")
   };
+
+  if(userEmail){
+    
+
+      <Box>
+      <AppBar position="static">
+        <Toolbar>
+        
+          
+              <Typography variant="subtitle1" component="span" sx={{ marginRight: '1rem', backgroundColor:"red"}}> {username} </Typography>
+              <Button color="inherit" onClick={handleLogout}> Logout </Button>
+          
+          
+        </Toolbar>
+      </AppBar>
+    </Box>
+
+    
+  }
+
+ 
 
   return (
     <Box>
