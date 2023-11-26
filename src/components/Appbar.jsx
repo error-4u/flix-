@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
@@ -11,7 +12,7 @@ import { useNavigate } from "react-router-dom";
  
 
 
-export default function Header() {
+export default function Appbar({userEmail, setUserEmail}) {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
@@ -28,6 +29,13 @@ export default function Header() {
         setLoggedIn(false);
       });
   }, []);
+
+  if(userEmail){
+    return <div style={{variant: "contained"}} onClick={() => {
+      localStorage.setItem("token", null);
+      setUserEmail(null);
+    }}>logout</div>
+  }
 
   const handleLogin = () => {
     navigate('/login');
@@ -49,7 +57,7 @@ export default function Header() {
     <Box>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="h6" sx={{ flexGrow: 1 }}>Coursera </Typography>
+          <Typography style={{cursor:"pointer"}} variant="h6" component="h6" sx={{ flexGrow: 1 }}>Coursera</Typography>
           {loggedIn ? (
             <>
               <Typography variant="subtitle1" component="span" sx={{ marginRight: '1rem' }}> {username} </Typography>

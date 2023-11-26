@@ -5,6 +5,7 @@ import { TextField } from '@mui/material';
 import {Card, Typography} from "@mui/material";
 import { useState } from 'react';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 
 // function Signin() {
@@ -71,9 +72,10 @@ import axios from "axios";
 
 // export default Signin;
 
-function Signin(){
+function Signin(setUserEmail={setUserEmail}){
 const [username, setEmail ]= useState("");
 const [password, setPassword] = useState(""); 
+const navigate = useNavigate();
 
 return <div style={{marginTop: 200}}>
         <center>
@@ -91,7 +93,7 @@ return <div style={{marginTop: 200}}>
       setPassword(e.target.value)
      }} />
      <br /> <br />
-     <Button variant="contained" onClick={() => {
+     {/* <Button variant="contained" onClick={() => {
       fetch("http://localhost:3000/admin/login", {
         method : "POST",
         body: JSON.stringify({
@@ -103,7 +105,25 @@ return <div style={{marginTop: 200}}>
         
         }
       })
-     }}>Login</Button>
+     }}>Login</Button> */}
+
+<Button
+                size={"large"}
+                  variant="contained"
+                  onClick={async() => {
+                      const response = await axios.post("http://localhost:3000/admin/login", {
+                          username: username,
+                          password: password
+                      })
+                      let data = response.data;
+                      localStorage.setItem("token", data.token);
+                     setUserEmail(username)
+                      navigate('/courses')
+                      
+                   
+                  }}
+
+              > login</Button>
      </Card>
      </center>
 
