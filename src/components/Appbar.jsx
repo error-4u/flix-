@@ -17,18 +17,18 @@ export default function Appbar({userEmail, setUserEmail}) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
 
-  useEffect(() => {
-    fetch( 'http://localhost:3000/admin/me', { headers: { "Authorization": "Bearer " + localStorage.getItem("token") }})
-      .then(response => response.json())
-      .then(data => {
-        setUsername(data.username);
-        setLoggedIn(true);
-      })
-      .catch(error => {
-        console.error('Error fetching username:', error);
-        setLoggedIn(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch( 'http://localhost:3000/admin/me', { headers: { "Authorization": "Bearer " + localStorage.getItem("token") }})
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setUsername(data.username);
+  //       setLoggedIn(true);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching username:', error);
+  //       setLoggedIn(false);
+  //     });
+  // }, []);
 
   const handleLogin = () => {
     navigate('/login');
