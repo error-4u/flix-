@@ -41,7 +41,7 @@ export default function Appbar({userEmail, setUserEmail}) {
   const handleLogout = () => {
     // Perform logout logic here
     localStorage.setItem("token", null);
-    // setLoggedIn(false);
+    setLoggedIn(false);
     setUserEmail(null)
     navigate("/signup")
   };
