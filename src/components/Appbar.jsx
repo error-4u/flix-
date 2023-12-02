@@ -41,29 +41,45 @@ export default function Appbar({userEmail, setUserEmail}) {
   const handleLogout = () => {
     // Perform logout logic here
     localStorage.setItem("token", null);
-    setLoggedIn(false);
-    setUsername('');
+    // setLoggedIn(false);
+    setUserEmail(null)
     navigate("/signup")
   };
 
-  if(userEmail){
-    
+  // if(userEmail){
+    if (userEmail) {
+      return (
+        <Box>
+          <AppBar>
+          <Toolbar>
+          <Typography style={{cursor:"pointer"}} variant="h6" component="h6" sx={{ flexGrow: 1 }}>{userEmail}</Typography>
+          <Button variant="contained" onClick={() => {
+           handleLogout()
+          }}>
+            Logout
+          </Button>
+          </Toolbar>
+          </AppBar>
+        </Box>
+        
+      );
+    }
 
-      <Box>
-      <AppBar position="static">
-        <Toolbar>
+  //     <Box>
+  //     <AppBar position="static">
+  //       <Toolbar>
         
           
-              <Typography variant="subtitle1" component="span" sx={{ marginRight: '1rem', backgroundColor:"red"}}> {username} </Typography>
-              <Button color="inherit" onClick={handleLogout}> Logout </Button>
+  //             <Typography variant="subtitle1" component="span" sx={{ marginRight: '1rem', backgroundColor:"red"}}> {username} </Typography>
+  //             <Button color="inherit" onClick={handleLogout}> Logout </Button>
           
           
-        </Toolbar>
-      </AppBar>
-    </Box>
+  //       </Toolbar>
+  //     </AppBar>
+  //   </Box>
 
     
-  }
+  // }
 
  
 
