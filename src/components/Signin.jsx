@@ -11,7 +11,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 
 function Signin({setUserEmail}) {
-  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ function Signin({setUserEmail}) {
               <TextField
                   onChange={(evant11) => {
                       let elemt = evant11.target;
-                      setUsername(elemt.value);
+                      setEmail(elemt.value);
                   }}
                   fullWidth={true}
                   label="Email"
@@ -55,13 +55,16 @@ function Signin({setUserEmail}) {
             onClick={async () => {
               try {
                 const res = await axios.post("http://localhost:3000/admin/login", {
-                  username: username,
+                  username: email,
                   password: password
                 });
 
                 const data = res.data;
                 localStorage.setItem("token", data.token);
-                setUserEmail(username);
+                setUser({
+                  userEmail: email,
+                  isLoading: false
+                });
                 navigate('/courses');
               } catch (error) {
                 console.error("Error during login:", error);

@@ -6,12 +6,15 @@ import {Card, Typography} from "@mui/material";
 import {useState} from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../store/atoms/user';
 
 
 function Signup({setUserEmail}) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate();
+  const setUser = useSetRecoilState(userState);
 
   return <div>
           <div style={{
@@ -57,7 +60,7 @@ function Signup({setUserEmail}) {
                       })
                       let data = response.data;
                       localStorage.setItem("token", data.token);
-                      setUserEmail(email)
+                      setUser({userEmail: email, isLoading: false})
                       navigate('/courses')
                    
                   }}

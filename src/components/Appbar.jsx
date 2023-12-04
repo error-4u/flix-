@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -9,27 +10,28 @@ import { useEffect, useState } from "react";
 //import Toolbar from "@mui/material";
 //import Box from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import { userState } from '../store/atoms/user';
+import { userEmailState } from '../store/selectors/userEmail';
+import { isUserLoading } from '../store/selectors/isUserLoading';
+
  
 
 
-export default function Appbar({userEmail, setUserEmail}) {
+export default function Appbar() {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [username, setUsername] = useState('');
 
-  // useEffect(() => {
-  //   fetch( 'http://localhost:3000/admin/me', { headers: { "Authorization": "Bearer " + localStorage.getItem("token") }})
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setUsername(data.username);
-  //       setLoggedIn(true);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching username:', error);
-  //       setLoggedIn(false);
-  //     });
-  // }, []);
 
+  // THESE TWO VARIABLE ARE SELECTORS
+  const userLoading = useRecoilValue(isUserLoading);
+  const userEmail = useRecoilValue(userEmailState);
+
+  const setUser = useSetRecoilState(userState);
+
+
+  if(userLoading){
+    return <>loading.......</>
+  }
   const handleLogin = () => {
     navigate('/login');
   };
@@ -41,30 +43,91 @@ export default function Appbar({userEmail, setUserEmail}) {
   const handleLogout = () => {
     // Perform logout logic here
     localStorage.setItem("token", null);
-    setLoggedIn(false);
-    setUserEmail(null)
-    navigate("/signup")
+   setUser({
+    isLoading: false,
+    userEmail: null
+   })
   };
 
   // if(userEmail){
     if (userEmail) {
-      return (
-        <Box>
-          <AppBar>
-          <Toolbar>
-          <Typography style={{cursor:"pointer"}} variant="h6" component="h6" sx={{ flexGrow: 1 }}>{userEmail}</Typography>
-          <Button variant="contained" onClick={() => {
-           handleLogout()
+      return <div style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: 4,
+          zIndex: 1
+      }}>
+          <div style={{marginLeft: 10, cursor: "pointer"}} onClick={() => {
+              navigate("/")
           }}>
-            Logout
-          </Button>
-          </Toolbar>
-          </AppBar>
-        </Box>
-        
-      );
-    }
+              <Typography variant={"h6"}>Coursera</Typography>
+          </div>
+  
+          <div style={{display: "flex"}}>
+              <div style={{marginRight: 10, display: "flex"}}>
+              <div style={{marginRight: 10}}>
+                      <Button
+                          onClick={() => {
+                              navigate("/addcourse")
+                          }}
+                      >Add course</Button>
+                  </div>
 
+                  <div style={{marginRight: 10}}>
+                      <Button
+                          onClick={() => {
+                              navigate("/courses")
+                          }}
+                      >Courses</Button>
+                  </div>
+
+                  <Button
+                      variant={"contained"}
+                      onClick={() => {
+                          localStorage.setItem("token", null);
+                          setUser({
+                              isLoading: false,
+                              userEmail: null
+                          })
+                      }}
+                  >Logout</Button>
+              </div>
+          </div>
+      </div>
+  } else {
+      return <div style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: 4,
+          zIndex: 1
+      }}>
+          <div style={{marginLeft: 10, cursor: "pointer"}} onClick={() => {
+              navigate("/")
+          }}>
+              <Typography variant={"h6"}>Coursera</Typography>
+          </div>
+  
+          <div style={{display: "flex"}}>
+              <div style={{marginRight: 10}}>
+                  <Button
+                      variant={"contained"}
+                      onClick={() => {
+                          navigate("/signup")
+                      }}
+                  >Signup</Button>
+              </div>
+              <div>
+                  <Button
+                      variant={"contained"}
+                      onClick={() => {
+                          navigate("/login")
+                      }}
+                  >Signin</Button>
+              </div>
+          </div>
+      </div>
+  }
+}
   //     <Box>
   //     <AppBar position="static">
   //       <Toolbar>
@@ -82,28 +145,6 @@ export default function Appbar({userEmail, setUserEmail}) {
   // }
 
  
-
-  return (
-    <Box>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography style={{cursor:"pointer"}} variant="h6" component="h6" sx={{ flexGrow: 1 }}>Coursera</Typography>
-          {loggedIn ? (
-            <>
-              <Typography variant="subtitle1" component="span" sx={{ marginRight: '1rem' }}> {username} </Typography>
-              <Button color="inherit" onClick={handleLogout}> Logout </Button>
-            </>
-          ) : (
-            <>
-              <Button color="inherit" onClick={handleLogin}> Login </Button>
-              <Button color="inherit" onClick={handleSignup}> Signup </Button>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
-}
 
 // function Appbar(){
 
