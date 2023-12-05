@@ -10,7 +10,7 @@ import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
 
 
-function Signin({setUserEmail}) {
+function Signin() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate();

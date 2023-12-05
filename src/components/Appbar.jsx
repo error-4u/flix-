@@ -68,7 +68,7 @@ export default function Appbar() {
               <div style={{marginRight: 10}}>
                       <Button
                           onClick={() => {
-                              navigate("/addcourse")
+                              navigate("/addcourses")
                           }}
                       >Add course</Button>
                   </div>
@@ -89,6 +89,7 @@ export default function Appbar() {
                               isLoading: false,
                               userEmail: null
                           })
+                          navigate("/")
                       }}
                   >Logout</Button>
               </div>
