@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
@@ -11,6 +12,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
+import { BASE_URL } from '../config';
 
 // THIS WILL GET INDIVIDUAL COURSE
  
@@ -27,7 +29,7 @@ useEffect(() => {
      function callback(res){
         res.json().then(callback2)
      }
-    fetch("http://localhost:3000/admin/courses", {
+    fetch(`${BASE_URL}/admin/courses/${courseId}`, {
         method: "GET",
         headers: {
           "authorization" : "Bearer " + localStorage.getItem("token")
@@ -160,7 +162,7 @@ function GetCourse(props){
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
+        <Button size="small">Edit</Button>
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>

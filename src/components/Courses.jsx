@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/jsx-no-undef */
@@ -10,6 +11,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
 
 // THIS WILL GET ALL THE COURSES 
 
@@ -46,29 +48,32 @@ function Courses() {
   )
 }
 
- export function Course(props){
+ export function Course({course}){
+  const navigate = useNavigate();
   return (
  
     <Card sx={{ maxWidth: 345, marginTop:"20px", backgroundColor:"yellow", marginLeft:"10px"}}>
       <CardMedia
         sx={{ height: 140, backgroundColor:"red"}}
-        image={props.course.imagelink} 
+        image={course.imagelink} 
        
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.course.title}
+          {course.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
      
        <br />
-       {props.course.description}
+       {course.description}
        <br />
       
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
+        <Button size="small" onClick={() => {
+          navigate("/course/" + course.id)
+        }}>Edit</Button>
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
