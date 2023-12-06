@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
 import { BASE_URL } from '../config';
+import courseState from "../store/atoms/course"
 
 // THIS WILL GET INDIVIDUAL COURSE
  
@@ -56,11 +57,12 @@ if(!course){
 
 function UpdateCourse(props){
     console.log("from Update course");
-    const [title , setTitle] = useState("");
-    const [description , setDescription] = useState("");
-    const [image, setimg] = useState("");
-    const course = props.course;
-    
+   const [courseDetails, setCourse] = useRecoilState(courseState);
+
+
+   const [title, setTitle] = useState(courseDetails.course.title);
+   const [description, setDescription] = useState(courseDetails.course.description);
+   const [image, setImage] = useState(courseDetails.course.image);
     
     return <div style={{
         marginTop : 200
@@ -162,7 +164,9 @@ function GetCourse(props){
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Edit</Button>
+        <Button size="small" onClick={() => {
+          navigate("/course/" + course.id)
+        }} >Edit</Button>
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
