@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { selector } from "recoil";
-import {courseStste} from "../atoms/course"
+import {courseState} from "../atoms/course"
 
 export const isCourseLoading = selector({
     key: "isCourseLoading",
     get : ({get}) => {
-        const state = get(courseStste);
-        return state.islLoading;
+        const state = get(courseState);
+        return state.isLoading;
     },
 });
 
@@ -15,7 +15,7 @@ export const isCourseLoading = selector({
 export const courseDetails = selector({
     key: "courseDetailState",
     get : ({get}) => {
-        const state = get(courseStste);
+        const state = get(courseState);
         return state.course;
     },
 });
@@ -23,7 +23,7 @@ export const courseDetails = selector({
 export const courseTitleState = selector({
     key: "courseTitleState",
     get: ({get}) => {
-        const state = get(courseStste);
+        const state = get(courseState);
         if (state.course){
         return state.course.title;
         }
@@ -34,7 +34,7 @@ export const courseTitleState = selector({
 export const coursePrice = selector({
     key: "coursePriceState",
     get: ({get}) => {
-        const state = get(courseStste);
+        const state = get(courseState);
         if (state.course){
         return state.course.price;
         }
@@ -45,7 +45,7 @@ export const coursePrice = selector({
 export const courseImage = selector({
     key: "courseImageState",
     get: ({get}) => {
-        const state = get(courseStste);
+        const state = get(courseState);
         if (state.course){
         return state.course.image;
         }
