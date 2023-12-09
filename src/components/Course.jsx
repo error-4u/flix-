@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
 import { BASE_URL } from '../config';
 import courseState from "../store/atoms/course"
+import Courses from './Courses';
 
 // THIS WILL GET INDIVIDUAL COURSE
  
