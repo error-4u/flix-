@@ -1,3 +1,5 @@
+/* eslint-disable no-unreachable */
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
@@ -5,58 +7,83 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import {
+    Card, 
+    CardActions, 
+    CardContent,
+    CardMedia
+    } from '@mui/material/Card';
+import { Typography, Button } from "@mui/material" 
 import { TextField } from '@mui/material';
 import { BASE_URL } from '../config';
 import courseState from "../store/atoms/course"
 import Courses from './Courses';
-
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import {isCourseLoading, courseTitle, courseImage} from "../store/selectors/course"
+import { Loading } from "./Loading"
 // THIS WILL GET INDIVIDUAL COURSE
  
 function Course() {
 
-    console.log("from course");
+console.log("from course");
 
 let { courseId } = useParams();
-const [courses, setCourses] = useState("");
-useEffect(() => {
-    function callback2(data){
-        setCourses(data.courses)
-    }
-     function callback(res){
-        res.json().then(callback2)
-     }
-    fetch(`${BASE_URL}/admin/courses/${courseId}`, {
-        method: "GET",
-        headers: {
-          "authorization" : "Bearer " + localStorage.getItem("token")
-        }
-    }).then(callback)
-}, []);
+const setCourse = useRecoilState(courseState);
+const courseLoading = useRecoilValue(isCourseLoading)
 
 
-let course = null;
-for (let i = 0; i < courses.length; i++) {
-    if(courses[i].id == courseId){
-    course = courses[i];
+   useEffect(() => {
+        axios.get(`${BASE_URL}/admin/course/${courseId}`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then(res => {
+            setCourse({isLoading: false, course: res.data.course});
+        })
+        .catch(e => {
+            setCourse({isLoading: false, course: null});
+        });
+    }, []);
+
+
+    if(courseLoading){
+    return 
+        <Loading/>    
     }
+  
+    
+    return <div>
+        <GrayTopper />
+        <Grid container>
+            <Grid item lg={8} md={12} sm={12}>
+                <UpdateCard />
+            </Grid>
+            <Grid item lg={4} md={12} sm={12}>
+                <CourseCard />
+            </Grid>
+        </Grid>
+    </div>
     
 }
 
-if(!course){
-    return <div>
-        error course
+function GrayTopper() {
+    const title = useRecoilValue(courseTitle);
+    return <div style={{height: 250, background: "#212121", top: 0, width: "100vw", zIndex: 0, marginBottom: -250}}>
+        <div style={{ height: 250, display: "flex", justifyContent: "center", flexDirection: "column"}}>
+            <div>
+                <Typography style={{color: "white", fontWeight: 600}} variant="h3" textAlign={"center"}>
+                    {title}
+                </Typography>
+            </div>
+        </div>
     </div>
 }
 
+
 // THIS WILL UPDATE INDIVIDUAL COURSE
 
-function UpdateCourse(props){
+function UpdateCourse(){
     console.log("from Update course");
    const [courseDetails, setCourse] = useRecoilState(courseState);
 
@@ -85,37 +112,27 @@ function UpdateCourse(props){
             }}/>
             <br /><br />
             <TextField variant='outlined' id='imglink' label='image link' fullWidth = {true} onChange={(e) => {
-                setimg(e.target.value)
+                setImage(e.target.value)
             }}/>
             <br /> <br />
             <Button variant='contained'onClick={() => {
     
                 function callback2(data){
                   
-                    let UpdateCourses = [];
-                    // alert("course updated")
-                    for (let i = 0; i < props.courses.length; i++) {
-                        if(props.courses[i].id == course.id){
-                            UpdateCourses.push ({
-                                id: course.id,
-                                title: title,
-                                description:description,
-                                imagelink: image
-
-                            })
-                        }
-                        else{
-                            UpdateCourses.push(props.courses[i]);
-                        }
-                        
-                    }
-                    props.setCourses(UpdateCourses)
+                    let updatedCourse = {
+                        _id: courseDetails.course._id,
+                        title: title,
+                        description: description,
+                        imageLink: image
+                    
+                    };
+                    setCourse({course: updateCourses, isLoading: false});
 
                 }
                 function callback1(res){
                     res.json().then(callback2)
                 }
-                fetch("http://localhost:3000/admin/courses/" + course.id, {
+                fetch("http://localhost:3000/admin/courses/" + Course.id, {
                     method: "PUT",
                     body : JSON.stringify({
                         title : title,
@@ -141,8 +158,11 @@ function UpdateCourse(props){
 // THIS WILL RENDER ALL THE INDIVIDUAL COURSE 
 
 function GetCourse(props){
-    const course = props.course;
+ 
     console.log("from get course");
+
+    const title = useRecoilValue(courseTitle);
+    const imageLink = useRecoilValue(courseImage);
    
     return <div >
     <Card sx={{ maxWidth: 345, marginTop:"20px", backgroundColor:"yellow", marginLeft:"10px"}}>
@@ -172,15 +192,6 @@ function GetCourse(props){
       </CardActions>
     </Card>
     </div>
-
-}
-  return (
-    <div style={{display:"flex",justifyContent:"center"}}>
-   <GetCourse course = {course}/>
-   
-   <UpdateCourse courses= {courses} course = {course} setCourses={setCourses}/>
-  </div>
-  )
 
 }
 
