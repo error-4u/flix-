@@ -8,19 +8,20 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import {
-    Card, 
-    CardActions, 
+    Card,
+    CardActions,
     CardContent,
-    CardMedia
-    } from '@mui/material/Card';
-import { Typography, Button } from "@mui/material" 
-import { TextField } from '@mui/material';
+    CardMedia,
+    Typography,
+    Button,
+    TextField,
+  } from '@mui/material';
 import { BASE_URL } from '../config';
-import courseState from "../store/atoms/course"
+import {courseState} from "../store/atoms/course"
 import Courses from './Courses';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import {isCourseLoading, courseTitle, courseImage} from "../store/selectors/course"
-import { Loading } from "./Loading"
+import {isCourseLoading, courseTitleState, courseImage} from "../store/selectors/course"
+import  Loading  from "./Loading"
 // THIS WILL GET INDIVIDUAL COURSE
  
 function Course() {
@@ -132,7 +133,7 @@ function UpdateCourse(){
                 function callback1(res){
                     res.json().then(callback2)
                 }
-                fetch("http://localhost:3000/admin/courses/" + Course.id, {
+                fetch("http://localhost:3000/admin/courses/" + courseDetails.Course.id, {
                     method: "PUT",
                     body : JSON.stringify({
                         title : title,
