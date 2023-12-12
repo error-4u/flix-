@@ -22,7 +22,8 @@ import Courses from './Courses';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {isCourseLoading, courseTitleState, courseImage} from "../store/selectors/course"
 import  Loading  from "./Loading"
-// THIS WILL GET INDIVIDUAL COURSE
+import {Grid} from "@mui/material"
+ // THIS WILL GET INDIVIDUAL COURSE
  
 function Course() {
 
