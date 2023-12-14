@@ -23,6 +23,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {isCourseLoading, courseTitleState, courseImage} from "../store/selectors/course"
 import  Loading  from "./Loading"
 import {Grid} from "@mui/material"
+import axios from 'axios'
  // THIS WILL GET INDIVIDUAL COURSE
  
 function Course() {
@@ -128,13 +129,13 @@ function UpdateCourse(){
                         imageLink: image
                     
                     };
-                    setCourse({course: updateCourses, isLoading: false});
+                    setCourse({course: updatedCourse, isLoading: false});
 
                 }
                 function callback1(res){
                     res.json().then(callback2)
                 }
-                fetch("http://localhost:3000/admin/courses/" + courseDetails.Course.id, {
+                fetch("http://localhost:3000/admin/courses/" + courseDetails.course.id, {
                     method: "PUT",
                     body : JSON.stringify({
                         title : title,
@@ -163,7 +164,7 @@ function GetCourse(props){
  
     console.log("from get course");
 
-    const title = useRecoilValue(courseTitle);
+    const title = useRecoilValue(courseTitleState);
     const imageLink = useRecoilValue(courseImage);
    
     return <div >
@@ -188,7 +189,7 @@ function GetCourse(props){
       </CardContent>
       <CardActions>
         <Button size="small" onClick={() => {
-          navigate("/course/" + course.id)
+          navigate("/course/" + props.course.id)
         }} >Edit</Button>
         <Button size="small">Learn More</Button>
       </CardActions>
