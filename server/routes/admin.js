@@ -71,5 +71,4 @@ router.put('/courses/:courseId', authenticateJwt, (req, res) => {
 router.get('/courses', authenticateJwt, (req, res) => {
     res.json({ courses: COURSES });
   });
-  
-module.exports = router
+  export default router
