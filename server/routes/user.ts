@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const fs = require("fs")
-const cors = require('cors');
-const mongoose = require('mongoose');
-const { User, Course, Admin } = require("../db")
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import fs from "fs";
+import cors from 'cors';
+import mongoose from 'mongoose';
+const { USERS, COURSES, ADMINS } = require("../db").default
 
-const { SECRET } = require("../middleware/auth")
-const { authenticateJwt } = require("../middleware/auth")
+import { SECRET } from "../middleware/auth";
+import { authenticateJwt } from "../middleware/auth";
 
 const router = express.Router();
 

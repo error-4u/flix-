@@ -1,74 +1,66 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const fs = require("fs")
-const cors = require('cors');
-const mongoose = require('mongoose');
-const { ADMINS,USERS,COURSES } = require("../db")
-
-const { SECRET } = require("../middleware/auth")
-const { authenticateJwt } = require("../middleware/auth")
-
-const router = express.Router();
-
-
-
-router.get("/me" , authenticateJwt , (req , res) => {
-    res.json({username: req.user.username})
-    if(!ADMINS){
-      res.status(403).json({msg:"Admin doesn't exist"})
-      return
+var express_1 = require("express");
+var jsonwebtoken_1 = require("jsonwebtoken");
+var fs_1 = require("fs");
+var _a = require("../db").default, ADMINS = _a.ADMINS, USERS = _a.USERS, COURSES = _a.COURSES;
+var auth_1 = require("../middleware/auth");
+var auth_2 = require("../middleware/auth");
+var router = express_1.default.Router();
+router.get("/me", auth_2.authenticateJwt, function (req, res) {
+    res.json({ username: req.user.username });
+    if (!ADMINS) {
+        res.status(403).json({ msg: "Admin doesn't exist" });
+        return;
     }
-  })
-
-router.post('/signup',  (req, res) => {
-    const { username, password } = req.body;
-    const admin = ADMINS.find(a => a.username === username);
+});
+router.post('/signup', function (req, res) {
+    var _a = req.body, username = _a.username, password = _a.password;
+    var admin = ADMINS.find(function (a) { return a.username === username; });
     console.log("admin signup");
     if (admin) {
-      res.status(403).json({ message: 'Admin already exists' });
-    } else {
-      const newAdmin = { username, password };
-      ADMINS.push(newAdmin);
-      fs.writeFileSync('admins.json', JSON.stringify(ADMINS));
-      const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });
-     res.json({ message: 'Admin created successfully', token });
-  
+        res.status(403).json({ message: 'Admin already exists' });
     }
-  });
-  
-router.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    const admin = ADMINS.find(a => a.username === username && a.password === password);
+    else {
+        var newAdmin = { username: username, password: password };
+        ADMINS.push(newAdmin);
+        fs_1.default.writeFileSync('admins.json', JSON.stringify(ADMINS));
+        var token = jsonwebtoken_1.default.sign({ username: username, role: 'admin' }, auth_1.SECRET, { expiresIn: '1h' });
+        res.json({ message: 'Admin created successfully', token: token });
+    }
+});
+router.post('/login', function (req, res) {
+    var _a = req.body, username = _a.username, password = _a.password;
+    var admin = ADMINS.find(function (a) { return a.username === username && a.password === password; });
     if (admin) {
-      const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });
-      res.json({ message: 'Logged in successfully', token });
-    } else {
-      res.status(403).json({ message: 'Invalid username or password' });
+        var token = jsonwebtoken_1.default.sign({ username: username, role: 'admin' }, auth_1.SECRET, { expiresIn: '1h' });
+        res.json({ message: 'Logged in successfully', token: token });
     }
-  });
-
-router.post('/courses', authenticateJwt, (req, res) => {
-    const course = req.body;
+    else {
+        res.status(403).json({ message: 'Invalid username or password' });
+    }
+});
+router.post('/courses', auth_2.authenticateJwt, function (req, res) {
+    var course = req.body;
     course.id = COURSES.length + 1;
     COURSES.push(course);
-    fs.writeFileSync('courses.json', JSON.stringify(COURSES));
+    fs_1.default.writeFileSync('courses.json', JSON.stringify(COURSES));
     res.json({ message: 'Course created successfully', courseId: course.id });
-  });
-  
-router.put('/courses/:courseId', authenticateJwt, (req, res) => {
-    const course = COURSES.find(c => c.id === parseInt(req.params.courseId));
+});
+router.put('/courses/:courseId', auth_2.authenticateJwt, function (req, res) {
+    var course = COURSES.find(function (c) { return c.id === parseInt(req.params.courseId); });
     if (course) {
-      Object.assign(course, req.body);
-      fs.writeFileSync('courses.json', JSON.stringify(COURSES));
-      res.json({ message: 'Course updated successfully' });
-    } else {
-      res.status(404).json({ message: 'Course not found' });
+        Object.assign(course, req.body);
+        fs_1.default.writeFileSync('courses.json', JSON.stringify(COURSES));
+        res.json({ message: 'Course updated successfully' });
     }
-  });
-  
-router.get('/courses', authenticateJwt, (req, res) => {
+    else {
+        res.status(404).json({ message: 'Course not found' });
+    }
+});
+router.get('/courses', auth_2.authenticateJwt, function (req, res) {
     res.json({ courses: COURSES });
-  });
-  export default router
+});
+exports.default = router;

@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import fs from 'fs';
+
 
 import cors from 'cors';
 import mongoose from 'mongoose';
