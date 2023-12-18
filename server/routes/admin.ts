@@ -3,8 +3,8 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import fs from "fs";
-import cors from 'cors';
-import mongoose from 'mongoose';
+// import cors from 'cors';
+// import mongoose from 'mongoose';
 const { ADMINS,USERS,COURSES } = require("../db").default
 
 import { SECRET } from "../middleware/auth";
