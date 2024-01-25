@@ -2,17 +2,23 @@
 /* eslint-disable no-undef */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authenticateJwt = exports.SECRET = void 0;
-var jsonwebtoken_1 = require("jsonwebtoken");
+var jwt = require("jsonwebtoken");
 exports.SECRET = 'SecRt';
 var authenticateJwt = function (req, res, next) {
     var authHeader = req.headers.authorization;
     if (authHeader) {
         var token = authHeader.split(' ')[1];
-        jsonwebtoken_1.default.verify(token, exports.SECRET, function (err, user) {
+        jwt.verify(token, exports.SECRET, function (err, payload) {
             if (err) {
                 return res.sendStatus(403);
             }
-            req.user = user;
+            if (!payload) {
+                return res.sendStatus(403);
+            }
+            if (typeof payload == "string") {
+                return res.sendStatus(403);
+            }
+            req.headers["userId"] = payload.id;
             next();
         });
     }

@@ -1,34 +1,43 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import fs from "fs";
-import cors from 'cors';
+import * as express from 'express';
+import * as jwt from 'jsonwebtoken';
+import  { Request as ExpressRequest, Response } from 'express';
+import cors = require('cors');
 import mongoose from 'mongoose';
-const { USERS, COURSES, ADMINS } = require("../db").default
+import { USERS, COURSES, ADMINS } from "../db";
 
 import { SECRET } from "../middleware/auth";
 import { authenticateJwt } from "../middleware/auth";
 
 const router = express.Router();
 
-router.post('/signup', (req, res) => {
+
+interface RequestWithUser extends ExpressRequest {
+  user: {
+    username: string;
+    role: string;
+  };
+}
+
+
+router.post('/signup', async (req, res) => {
     const { username, password } = req.body;
-    const user = USERS.find(u => u.username === username);
+    const user = await USERS.findOne((u: { username: any; }) => u.username === username);
     if (user) {
       res.status(403).json({ message: 'User already exists' });
     } else {
       const newUser = { username, password };
       USERS.push(newUser);
-      fs.writeFileSync('users.json', JSON.stringify(USERS));
+      USERS.save();
       const token = jwt.sign({ username, role: 'user' }, SECRET, { expiresIn: '1h' });
       res.json({ message: 'User created successfully', token });
     }
   });
   
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.headers;
-    const user = USERS.find(u => u.username === username && u.password === password);
+    const user = await USERS.findOne((u: { username: string | string[]; password: string | string[]; }) => u.username === username && u.password === password);
     if (user) {
       const token = jwt.sign({ username, role: 'user' }, SECRET, { expiresIn: '1h' });
       res.json({ message: 'Logged in successfully', token });
@@ -37,21 +46,21 @@ router.post('/login', (req, res) => {
     }
   });
   
-router.get('/courses', authenticateJwt, (req, res) => {
+router.get('/courses', authenticateJwt,  async (req, res) => {
+  const courses = await COURSES.find({published: true});
     res.json({ courses: COURSES });
   });
   
-router.post('/courses/:courseId', authenticateJwt, (req, res) => {
-    const course = COURSES.find(c => c.id === parseInt(req.params.courseId));
+router.post('/courses/:courseId', authenticateJwt, async (req:RequestWithUser, res: Response) => {
+    const course = await COURSES.findById(req.params.courseId);
+    console.log(course)
     if (course) {
-      const user = USERS.find(u => u.username === req.user.username);
+      const user = await USERS.findOne((u: { username: string; }) => u.username === req.user.username);
       if (user) {
-        if (!user.purchasedCourses) {
-          user.purchasedCourses = [];
-        }
         user.purchasedCourses.push(course);
-        fs.writeFileSync('users.json', JSON.stringify(USERS));
+        await user.save();
         res.json({ message: 'Course purchased successfully' });
+
       } else {
         res.status(403).json({ message: 'User not found' });
       }
@@ -60,8 +69,8 @@ router.post('/courses/:courseId', authenticateJwt, (req, res) => {
     }
   });
   
-router.get('/purchasedCourses', authenticateJwt, (req, res) => {
-    const user = USERS.find(u => u.username === req.user.username);
+router.get('/purchasedCourses', authenticateJwt, async (req: RequestWithUser, res) => {
+    const user = await USERS.findOne((u: { username: string; }) => u.username === req.user.username);
     if (user) {
       res.json({ purchasedCourses: user.purchasedCourses || [] });
     } else {
@@ -69,4 +78,4 @@ router.get('/purchasedCourses', authenticateJwt, (req, res) => {
     }
   });
   
-export default router
+export default router;

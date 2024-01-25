@@ -1,24 +1,25 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-import { readFileSync } from 'fs';
+const mongoose = require("mongoose");
 
-let ADMINS = [];
-let USERS = [];
-let COURSES = [];
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+    purchasedCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
+});
 
-// Read data from file, or initialize to empty array if file does not exist
-try {
-    ADMINS = JSON.parse(readFileSync('admins.json', 'utf8'));
-    USERS = JSON.parse(readFileSync('users.json', 'utf8'));
-    COURSES = JSON.parse(readFileSync('courses.json', 'utf8'));
-} catch {
-    ADMINS = [];
-    USERS = [];
-    COURSES = [];
-}
+const adminSchema = new mongoose.Schema({
+    usename: String,
+    password: String
+})
 
-export default {
-    ADMINS,
-    USERS,
-    COURSES
-}
+const courseSchema = new mongoose.Schema({
+    title: String,
+    description: String,
+    price: Number,
+    imageLink: String,
+    published: Boolean
+});
+
+export const USERS = mongoose.model('User', userSchema);
+export const ADMINS = mongoose.model("Admin", adminSchema )
+export const COURSES = mongoose.model('Todo', courseSchema);
+

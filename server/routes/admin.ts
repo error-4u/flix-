@@ -1,46 +1,54 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import fs from "fs";
-// import cors from 'cors';
-// import mongoose from 'mongoose';
-const { ADMINS,USERS,COURSES } = require("../db").default
+import * as express from 'express';
+import * as  jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+import  { Request as ExpressRequest, Response } from 'express';
+import { ADMINS, USERS, COURSES } from "../db/index.js";
 
 import { SECRET } from "../middleware/auth";
 import { authenticateJwt } from "../middleware/auth";
 
+
 const router = express.Router();
 
+interface RequestWithUser extends ExpressRequest {
+  user: {
+    username: string;
+    role: string;
+  };
+}
 
 
-router.get("/me" , authenticateJwt , (req , res) => {
-    res.json({username: req.user.username})
-    if(!ADMINS){
+router.get("/me" , authenticateJwt ,async  (req:RequestWithUser , res:Response) => {
+   const admin = await ADMINS.findOne({username: req.user.username}).exec();
+    if(!admin){
       res.status(403).json({msg:"Admin doesn't exist"})
       return
     }
+    res.json({username: req.user.username})
   })
 
-router.post('/signup',  (req, res) => {
+router.post('/signup', async (req, res) => {
     const { username, password } = req.body;
-    const admin = ADMINS.find(a => a.username === username);
-    console.log("admin signup");
-    if (admin) {
+    const Existingadmin = await ADMINS.findOne({ username }).exec();
+    console.log("signup");
+    if (Existingadmin) {
       res.status(403).json({ message: 'Admin already exists' });
     } else {
-      const newAdmin = { username, password };
-      ADMINS.push(newAdmin);
-      fs.writeFileSync('admins.json', JSON.stringify(ADMINS));
+      const newAdmin = new ADMINS({ username, password });
+      
+      await newAdmin.save()
+
       const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });
      res.json({ message: 'Admin created successfully', token });
   
     }
   });
   
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    const admin = ADMINS.find(a => a.username === username && a.password === password);
+    const admin = await ADMINS.findOne({username, password}).exec();
     if (admin) {
       const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });
       res.json({ message: 'Logged in successfully', token });
@@ -49,28 +57,33 @@ router.post('/login', (req, res) => {
     }
   });
 
-router.post('/courses', authenticateJwt, (req, res) => {
-    const course = req.body;
-    course.id = COURSES.length + 1;
-    COURSES.push(course);
-    fs.writeFileSync('courses.json', JSON.stringify(COURSES));
+router.post('/addcourses', authenticateJwt, async (req, res) => {
+    const course = new COURSES(req.body);
+   await course.save();
     res.json({ message: 'Course created successfully', courseId: course.id });
   });
   
-router.put('/courses/:courseId', authenticateJwt, (req, res) => {
-    const course = COURSES.find(c => c.id === parseInt(req.params.courseId));
+router.put('/courses/:courseId', authenticateJwt, async (req, res) => {
+    const courseId = req.params.courseId;
+    const course = await COURSES.findByIdAndUpdate(courseId, req.body);
     if (course) {
-      Object.assign(course, req.body);
-      fs.writeFileSync('courses.json', JSON.stringify(COURSES));
+    
       res.json({ message: 'Course updated successfully' });
     } else {
       res.status(404).json({ message: 'Course not found' });
     }
   });
-  
-router.get('/courses', authenticateJwt, (req, res) => {
-    res.json({ courses: COURSES });
-  });
 
+  
+  router.get('/courses', authenticateJwt, async (req, res) => {
+    try {
+      const courses = await COURSES.find({}).exec();
+      res.json({ courses });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+  
 
   export default router;
