@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
     }
   });
 
-router.post('/addcourses', authenticateJwt, async (req, res) => {
+router.post('/courses', authenticateJwt, async (req, res) => {
     const course = new COURSES(req.body);
    await course.save();
     res.json({ message: 'Course created successfully', courseId: course.id });
