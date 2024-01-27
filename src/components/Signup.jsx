@@ -49,10 +49,11 @@ function Signup({setUserEmail}) {
                   type={"password"}
               />
               <br/><br/>
-
+              <center>
               <Button
                   size={"large"}
                   variant="contained"
+                  style={{width:400}}
                   onClick={async() => {
                       const response = await axios.post("http://localhost:3000/admin/signup", {
                           username: email,
@@ -66,6 +67,7 @@ function Signup({setUserEmail}) {
                   }}
 
               > Signup</Button>
+              </center>
           </Card>
       </div>
   </div>

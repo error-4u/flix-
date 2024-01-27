@@ -48,10 +48,11 @@ function Signin() {
                   type={"password"}
               />
               <br/><br/>
-
+              <center>
               <Button
             size="large"
             variant="contained"
+            style={{width:400}}
             onClick={async () => {
               try {
                 const res = await axios.post("http://localhost:3000/admin/login", {
@@ -72,6 +73,7 @@ function Signin() {
               }
             }}
           > Signin</Button>
+          </center>
           </Card>
       </div>
   </div>
