@@ -19,6 +19,12 @@ function Signin() {
 
 
   const handlelogin = async () => {
+
+    if (!email.trim() || password.length < 6) {
+      alert("Invalid email or password. Make sure email is not empty and password is at least 6 characters long.");
+      return;
+    }
+
     try {
       const res = await axios.post("http://localhost:3000/admin/login", {
        

@@ -10,12 +10,27 @@ import { userState } from '../store/atoms/user';
 import { Link } from 'react-router-dom'
 
 
-function Signup({setUserEmail}) {
+function Signup() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userState);
 
+
+  const handlesignup = async () => {
+    if (!email.trim() || password.length < 6){
+      alert("Invalid email & password")
+    }
+    const res = await axios.post("http://localhost:3000/admin/signup", {
+        username: email,
+        password: password
+
+    })
+    let data = res.data;
+    localStorage.setItem("token", data.token)
+    setUser({userEmail: email, isLoading: false})
+     navigate('/courses')
+}
   return <div style={{
     height:"100vh",
     width: "100vw",
@@ -89,22 +104,10 @@ function Signup({setUserEmail}) {
     }}
   />
 
-<button onClick={ async () => {
-    const res = await axios.post("http://localhost:3000/admin/signup", {
-        username: email,
-        password: password
-
-    })
-    let data = res.data;
-    localStorage.setItem("token", data.token)
-    setUser({userEmail: email, isLoading: false})
-     navigate('/courses')
-}}
+<button onClick={handlesignup }
 
 
-
-
-    style={{
+   style={{
       backgroundColor: '#4e0eff',
       color: 'white',
       padding: '1rem 2rem',
