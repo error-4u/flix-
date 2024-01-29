@@ -82,8 +82,8 @@ function Signin() {
 
   >
 
-<img style={{ height: '5rem' }} src="../assets/eren" alt="logo" />
-    <h1 style={{ color: 'white', textTransform: 'uppercase' }}>snappy</h1>
+<img style={{ height: '5rem' }} src="../assets/eren.jpg" alt="logo" />
+    <h1 style={{ color: 'white', textTransform: 'uppercase' }}>Flix</h1>
     </div>
     <input
     style={{
