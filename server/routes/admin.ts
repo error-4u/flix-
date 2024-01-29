@@ -32,13 +32,14 @@ router.get("/me" , authenticateJwt ,async  (req:RequestWithUser , res:Response) 
 router.post('/signup', async (req, res) => {
     const { username, password } = req.body;
     const Existingadmin = await ADMINS.findOne({ username }).exec();
-    console.log("signup");
+    
     if (Existingadmin) {
       res.status(403).json({ message: 'Admin already exists' });
     } else {
       const newAdmin = new ADMINS({ username, password });
       
       await newAdmin.save()
+      console.log("signup");
 
       const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });
      res.json({ message: 'Admin created successfully', token });
@@ -52,6 +53,7 @@ router.post('/login', async (req, res) => {
     if (admin) {
       const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });
       res.json({ message: 'Logged in successfully', token });
+      console.log("loggedIn")
     } else {
       res.status(403).json({ message: 'Invalid username or password' });
     }

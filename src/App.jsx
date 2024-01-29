@@ -14,6 +14,7 @@ import Landing from './components/Landing'
 import axios from 'axios'
 import { BASE_URL } from './config'
 import { userState } from './store/atoms/user'
+import Form from './utils/Form'
 import React from 'react'
 
 function App() {

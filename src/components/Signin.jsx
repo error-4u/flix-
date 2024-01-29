@@ -8,12 +8,41 @@ import {Card, Typography} from "@mui/material";
 import { useState } from 'react';
 import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
-
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../store/atoms/user';
 
 function Signin() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate();
+  const setUser = useSetRecoilState(userState);
+
+
+  const handlelogin = async () => {
+    try {
+      const res = await axios.post("http://localhost:3000/admin/login", {
+       
+      username: email,
+      password: password
+      });
+
+      const data = await res.data
+      localStorage.setItem("token", data.token);
+      if(data.token){
+      setUser({
+        userEmail: email,
+        isLoading: false
+      });
+      navigate('/courses');
+    }
+    } catch (error) {
+      console.error("Error during login:", error);
+      // Handle error, maybe show a message to the user
+    }
+  }
+
+
+
 
   return <div>
           <div style={{
@@ -53,25 +82,7 @@ function Signin() {
             size="large"
             variant="contained"
             style={{width:400}}
-            onClick={async () => {
-              try {
-                const res = await axios.post("http://localhost:3000/admin/login", {
-                  username: email,
-                  password: password
-                });
-
-                const data = res.data;
-                localStorage.setItem("token", data.token);
-                setUser({
-                  userEmail: email,
-                  isLoading: false
-                });
-                navigate('/courses');
-              } catch (error) {
-                console.error("Error during login:", error);
-                // Handle error, maybe show a message to the user
-              }
-            }}
+            onClick={handlelogin}
           > Signin</Button>
           </center>
           </Card>

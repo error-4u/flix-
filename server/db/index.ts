@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
 });
 
 const adminSchema = new mongoose.Schema({
-    usename: String,
+    username: String,
     password: String
 })
 

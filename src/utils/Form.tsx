@@ -1,42 +1,41 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-
-
-import {useState} from "react";
-import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { userState } from '../store/atoms/user';
+import React from 'react'
 import { Link } from 'react-router-dom'
 
+function Form() {
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+        throw new Error('Function not implemented.')
+    }
 
-function Signup({setUserEmail}) {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const navigate = useNavigate();
-  const setUser = useSetRecoilState(userState);
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
+        throw new Error('Function not implemented.')
+    }
 
-  return <div style={{
-    height:"100vh",
-    width: "100vw",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent:"center",
-    gap:"1rem",
-    alignItems:"center",
-    backgroundColor:"#131324"    
-}}>
-
-
+  return (
     <div style={{
+        height:"100vh",
+        width: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent:"center",
+        gap:"1rem",
+        alignItems:"center",
+        backgroundColor:"#131324"    
+    }}>
+
+
+<form
+  style={{
     display: 'flex',
     flexDirection: 'column',
     gap: '2rem',
     backgroundColor: '#00000076',
     borderRadius: '2rem',
     padding: '5rem',
-  }}>
-         <div
+  }}
+  action=""
+  onSubmit={(event) => handleSubmit(event)}
+>
+  <div
     style={{
       display: 'flex',
       alignItems: 'center',
@@ -44,13 +43,11 @@ function Signup({setUserEmail}) {
       justifyContent: 'center',
     }}
     className="brand"
-
   >
-
-<img style={{ height: '5rem' }} src="../assets/eren" alt="logo" />
+    <img style={{ height: '5rem' }} src="../assets/eren" alt="logo" />
     <h1 style={{ color: 'white', textTransform: 'uppercase' }}>snappy</h1>
-    </div>
-    <input
+  </div>
+  <input
     style={{
       backgroundColor: 'transparent',
       padding: '1rem',
@@ -63,15 +60,10 @@ function Signup({setUserEmail}) {
     type="text"
     placeholder="Username"
     name="username"
-    autoComplete='true'
-    onChange={(e) => {
-        let elem = e.target;
-        setEmail(elem.value);
-    }}
+    onChange={(e) => handleChange(e)}
     min="3"
   />
-
-<input
+  <input
     style={{
       backgroundColor: 'transparent',
       padding: '1rem',
@@ -84,26 +76,9 @@ function Signup({setUserEmail}) {
     type="password"
     placeholder="Password"
     name="password"
-    onChange={(e) => {
-        setPassword(e.target.value)
-    }}
+    onChange={(e) => handleChange(e)}
   />
-
-<button onClick={ async () => {
-    const res = await axios.post("http://localhost:3000/admin/signup", {
-        username: email,
-        password: password
-
-    })
-    let data = res.data;
-    localStorage.setItem("token", data.token)
-    setUser({userEmail: email, isLoading: false})
-     navigate('/courses')
-}}
-
-
-
-
+  <button
     style={{
       backgroundColor: '#4e0eff',
       color: 'white',
@@ -113,12 +88,11 @@ function Signup({setUserEmail}) {
       cursor: 'pointer',
       borderRadius: '0.4rem',
       fontSize: '1rem',
-      textTransform: 'uppercase'
-      
+      textTransform: 'uppercase',
     }}
     type="submit"
   >
-    SignUP
+    Log In
   </button>
   <span style={{ color: 'white', textTransform: 'uppercase' }}>
     Don't have an account ?{' '}
@@ -129,10 +103,11 @@ function Signup({setUserEmail}) {
       Create One.
     </Link>
   </span>
+</form>
+
       
-      
-      </div>
-  </div>
+    </div>
+  )
 }
 
-export default Signup;
+export default Form
