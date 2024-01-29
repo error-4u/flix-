@@ -124,10 +124,10 @@ function Signup() {
     SignUP
   </button>
   <span style={{ color: 'white', textTransform: 'uppercase' }}>
-    Don't have an account ?{' '}
+    Allready have an account ?{' '}
     <Link
       style={{ color: '#4e0eff', textDecoration: 'none', fontWeight: 'bold' }}
-      to="/register"
+      to="/login"
     >
       Create One.
     </Link>

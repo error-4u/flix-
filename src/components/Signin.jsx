@@ -10,6 +10,7 @@ import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../store/atoms/user';
+import { Link } from 'react-router-dom'
 
 function Signin() {
   const [email, setEmail] = useState("")
@@ -50,48 +51,109 @@ function Signin() {
 
 
 
-  return <div>
-          <div style={{
-              paddingTop: 150,
-              marginBottom: 10,
-              display: "flex",
-              justifyContent: "center"
-          }}>
-              <Typography variant={"h6"}>
-              Welcome to Coursera. Sign up below
-              </Typography>
-          </div>
-      <div style={{display: "flex", justifyContent: "center"}}>
-          <Card variant={"outlined"} style={{width: 400, padding: 20}}>
-              <TextField
-                  onChange={(evant11) => {
-                      let elemt = evant11.target;
-                      setEmail(elemt.value);
-                  }}
-                  fullWidth={true}
-                  label="Email"
-                  variant="outlined"
-              />
-              <br/><br/>
-              <TextField
-                  onChange={(e) => {
-                      setPassword(e.target.value);
-                  }}
-                  fullWidth={true}
-                  label="Password"
-                  variant="outlined"
-                  type={"password"}
-              />
-              <br/><br/>
-              <center>
-              <Button
-            size="large"
-            variant="contained"
-            style={{width:400}}
-            onClick={handlelogin}
-          > Signin</Button>
-          </center>
-          </Card>
+  return <div style={{
+    height:"100vh",
+    width: "100vw",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent:"center",
+    gap:"1rem",
+    alignItems:"center",
+    backgroundColor:"#131324"    
+}}>
+
+
+    <div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '2rem',
+    backgroundColor: '#00000076',
+    borderRadius: '2rem',
+    padding: '5rem',
+  }}>
+         <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '1rem',
+      justifyContent: 'center',
+    }}
+    className="brand"
+
+  >
+
+<img style={{ height: '5rem' }} src="../assets/eren" alt="logo" />
+    <h1 style={{ color: 'white', textTransform: 'uppercase' }}>snappy</h1>
+    </div>
+    <input
+    style={{
+      backgroundColor: 'transparent',
+      padding: '1rem',
+      border: '0.1rem solid #4e0eff',
+      borderRadius: '0.4rem',
+      color: 'white',
+      width: '100%',
+      fontSize: '1rem',
+    }}
+    type="text"
+    placeholder="Username"
+    name="username"
+    autoComplete='true'
+    onChange={(e) => {
+        let elem = e.target;
+        setEmail(elem.value);
+    }}
+    min="3"
+  />
+
+<input
+    style={{
+      backgroundColor: 'transparent',
+      padding: '1rem',
+      border: '0.1rem solid #4e0eff',
+      borderRadius: '0.4rem',
+      color: 'white',
+      width: '100%',
+      fontSize: '1rem',
+    }}
+    type="password"
+    placeholder="Password"
+    name="password"
+    onChange={(e) => {
+        setPassword(e.target.value)
+    }}
+  />
+
+<button onClick={handlelogin }
+
+
+   style={{
+      backgroundColor: '#4e0eff',
+      color: 'white',
+      padding: '1rem 2rem',
+      border: 'none',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      borderRadius: '0.4rem',
+      fontSize: '1rem',
+      textTransform: 'uppercase'
+      
+    }}
+    type="submit"
+  >
+    LogIn
+  </button>
+  <span style={{ color: 'white', textTransform: 'uppercase' }}>
+    Don't have an account ?{' '}
+    <Link
+      style={{ color: '#4e0eff', textDecoration: 'none', fontWeight: 'bold' }}
+      to="/signup"
+    >
+      Create One.
+    </Link>
+  </span>
+      
+      
       </div>
   </div>
 }
