@@ -16,7 +16,7 @@ import axios from 'axios';
 
 // THIS WILL GET ALL THE COURSES 
 
-function Courses() {
+function AdminCourses() {
   const [courses, setCourses] = useState([]);
    
   const init = async () => {
@@ -39,7 +39,7 @@ function Courses() {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+    <div style={{ key:"courses",isplay: "flex", flexWrap: "wrap", justifyContent: "center" }}>
       {courses && courses.map(course => (
         <Course course={course} />
       ))}
@@ -67,11 +67,11 @@ export function Course({ course }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => {"/buynow"}}>Buy Now</Button>
+        <Button size="small" onClick={() => { navigate("/course/" + course.id) }}>Edit</Button>
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
   );
 }
 
-export default Courses;
+export default AdminCourses;

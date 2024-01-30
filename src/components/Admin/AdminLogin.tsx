@@ -1,36 +1,57 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable no-undef */
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-unused-vars */
-
-
-import {useState} from "react";
+import Button from '@mui/material/Button';
+import { TextField } from '@mui/material';
+import {Card, Typography} from "@mui/material";
+import { useState } from 'react';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { userState } from '../store/atoms/user';
+import { userState } from '../../store/atoms/user';
 import { Link } from 'react-router-dom'
+import React from 'react';
 
-
-function Signup() {
+function Admin() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userState);
 
 
-  const handlesignup = async () => {
-    if (!email.trim() || password.length < 6){
-      alert("Invalid email & password")
-    }
-    const res = await axios.post("http://localhost:3000/user/signup", {
-        username: email,
-        password: password
+  const handlelogin = async () => {
 
-    })
-    let data = res.data;
-    localStorage.setItem("token", data.token)
-    setUser({userEmail: email, isLoading: false})
-     navigate('/courses')
-}
+    if (!email.trim() || password.length < 6) {
+      alert("Invalid email or password. Make sure email is not empty and password is at least 6 characters long.");
+      return;
+    }
+
+    try {
+      const res = await axios.post("http://localhost:3000/admin/login", {
+       
+      username: email,
+      password: password
+      });
+
+      const data = await res.data
+      localStorage.setItem("token", data.token);
+      if(data.token){
+      setUser({
+        userEmail: email,
+        isLoading: false
+      });
+      navigate('/admin/courses');
+    }
+    } catch (error) {
+      console.error("Error during login:", error);
+      // Handle error, maybe show a message to the user
+    }
+  }
+
+
+
+
   return <div style={{
     height:"100vh",
     width: "100vw",
@@ -62,8 +83,9 @@ function Signup() {
 
   >
 
-<img style={{ height: '5rem' }} src="" alt="logo" />
+<img style={{ height: '5rem' }} src="../assets/eren.jpg" alt="logo" />
     <h1 style={{ color: 'white', textTransform: 'uppercase' }}>Flix</h1>
+    <h1 style={{ color: 'white', textTransform: 'uppercase' }}>Admin login</h1>
     </div>
     <input
     style={{
@@ -104,7 +126,7 @@ function Signup() {
     }}
   />
 
-<button onClick={handlesignup }
+<button onClick={handlelogin }
 
 
    style={{
@@ -121,24 +143,15 @@ function Signup() {
     }}
     type="submit"
   >
-    SignUP
+    LogIn
   </button>
   <span style={{ color: 'white', textTransform: 'uppercase' }}>
-    Allready have an account ?{' '}
+    Don't have an account ?{' '}
     <Link
       style={{ color: '#4e0eff', textDecoration: 'none', fontWeight: 'bold' }}
-      to="/login"
+      to="/signup"
     >
       Create One.
-    </Link>
-  </span>
-  <span style={{ color: 'white', textTransform: 'uppercase' }}>
-    Login as <span></span>
-    <Link
-      style={{ color: '#4e0eff', textDecoration: 'none', fontWeight: 'bold' }}
-      to="/admin/login"
-    >
-      ADMIN ?
     </Link>
   </span>
       
@@ -147,4 +160,4 @@ function Signup() {
   </div>
 }
 
-export default Signup;
+export default Admin;

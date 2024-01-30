@@ -22,25 +22,33 @@ interface RequestWithUser extends ExpressRequest {
 
 
 router.post('/signup', async (req, res) => {
+  try {
     const { username, password } = req.body;
-    const user = await USERS.findOne((u: { username: any; }) => u.username === username);
+    const user = await USERS.findOne({username}).exec();
     if (user) {
       res.status(403).json({ message: 'User already exists' });
     } else {
-      const newUser = { username, password };
-      USERS.push(newUser);
-      USERS.save();
+      const newUser = new USERS({ username, password });
+     
+      newUser.save();
       const token = jwt.sign({ username, role: 'user' }, SECRET, { expiresIn: '1h' });
       res.json({ message: 'User created successfully', token });
+      console.log("user signed up")
     }
-  });
+  
+} 
+catch (error){
+      console.error("error while user signup",error)
+}
+});
   
 router.post('/login', async (req, res) => {
-    const { username, password } = req.headers;
-    const user = await USERS.findOne((u: { username: string | string[]; password: string | string[]; }) => u.username === username && u.password === password);
+    const { username, password } = req.body;
+    const user = await USERS.findOne({username, password}).exec();
     if (user) {
       const token = jwt.sign({ username, role: 'user' }, SECRET, { expiresIn: '1h' });
       res.json({ message: 'Logged in successfully', token });
+      console.log("user loggedIn")
     } else {
       res.status(403).json({ message: 'Invalid username or password' });
     }
@@ -48,7 +56,7 @@ router.post('/login', async (req, res) => {
   
 router.get('/courses', authenticateJwt,  async (req, res) => {
   const courses = await COURSES.find({published: true});
-    res.json({ courses: COURSES });
+    res.json({ courses });
   });
   
 router.post('/courses/:courseId', authenticateJwt, async (req:RequestWithUser, res: Response) => {

@@ -6,32 +6,39 @@ import Signup from './components/Signup'
 import Appbar from "./components/Appbar"
 import Signin from './components/Signin'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import AddCourses from './components/AddCourses'
+import AddCourses from './components/Admin/AddCourses'
 import Courses from './components/Courses'
-import Course from './components/Course'
+import AdminCourse from './components/Admin/AdminCourse'
 import { RecoilRoot, useSetRecoilState  } from 'recoil'
 import Landing from './components/Landing'
 import axios from 'axios'
 import { BASE_URL } from './config'
 import { userState } from './store/atoms/user'
-import Form from './utils/Form'
 import React from 'react'
+import AdminAppbar from './components/Admin/AdminLogin'
+import Admin from './components/Admin/AdminLogin'
+import AdminCourses from './components/Admin/AdminCourses'
 
 function App() {
+
+  
+
   return (
     <div style={{height:"100vh", width: "100vw",
     backgroundColor: "#eeeeee"}}>
     <RecoilRoot>
     <Router>
-    <Appbar  />
+   <Appbar />
     <InitUser />
       <Routes>
           <Route path='/' element ={<Landing />}/>
-           <Route path='/addcourses' element = {<AddCourses />} />
+           <Route path='/admin/addcourses' element = {<AddCourses />} />
           <Route path='/signup' element = {<Signup  />} />
           <Route path='/login' element = {<Signin />}  />
-          <Route path='/courses' element = {<Courses />} />
-          <Route path='/course/:courseId' element = {<Course />} />
+          <Route path='/user/courses' element = {<Courses />} />
+          <Route path='/admin/login' element = {<Admin />} />
+          <Route path='admin/course/:courseId' element = {<AdminCourse />} />
+          <Route path='/admin/courses' element = {<AdminCourses />} />
       </Routes>
 
     </Router>
@@ -46,7 +53,7 @@ function InitUser(){
   const setUser = useSetRecoilState(userState);
   const init = async() => {
     try{
-      const response = await axios.get(`${BASE_URL}/admin/me`, {
+      const response = await axios.get(`${BASE_URL}/user/me`, {
         headers:{
           "Authorization" : "Bearer " + localStorage.getItem("token")
         }

@@ -18,7 +18,7 @@ import { isUserLoading } from '../store/selectors/isUserLoading';
  
 
 
-export default function Appbar() {
+export default function AdminAppbar() {
   const navigate = useNavigate();
 
 
@@ -65,12 +65,18 @@ export default function Appbar() {
   
           <div style={{display: "flex"}}>
               <div style={{marginRight: 10, display: "flex"}}>
-           
+              <div style={{marginRight: 10}}>
+                      <Button
+                          onClick={() => {
+                              navigate("/admin/addcourses")
+                          }}
+                      >Add course</Button>
+                  </div>
 
                   <div style={{marginRight: 10}}>
                       <Button
                           onClick={() => {
-                              navigate("/user/courses")
+                              navigate("/admin/courses")
                           }}
                       >Courses</Button>
                   </div>

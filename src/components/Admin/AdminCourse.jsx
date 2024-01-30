@@ -16,12 +16,12 @@ import {
     Button,
     TextField,
   } from '@mui/material';
-import { BASE_URL } from '../config';
-import {courseState} from "../store/atoms/course"
-import Courses from './Courses';
+import { BASE_URL } from '../../config';
+import {courseState} from "../../store/atoms/course"
+import AdminCourses from './AdminCourses';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import {isCourseLoading, courseTitleState, courseImage} from "../store/selectors/course"
-import  Loading  from "./Loading"
+import {isCourseLoading, courseTitleState, courseImage} from "../../store/selectors/course"
+import  Loading  from "../Loading"
 import {Grid} from "@mui/material"
 import axios from 'axios'
  // THIS WILL GET INDIVIDUAL COURSE

@@ -27,20 +27,21 @@ function Signin() {
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/admin/login", {
+      const res = await axios.post("http://localhost:3000/user/login", {
        
       username: email,
       password: password
       });
 
       const data = await res.data
-      localStorage.setItem("token", data.token);
+      
       if(data.token){
+        localStorage.setItem("token", data.token);
       setUser({
         userEmail: email,
         isLoading: false
       });
-      navigate('/courses');
+      navigate('/user/courses');
     }
     } catch (error) {
       console.error("Error during login:", error);
@@ -152,6 +153,16 @@ function Signin() {
       Create One.
     </Link>
   </span>
+  <span style={{ color: 'white', textTransform: 'uppercase' }}>
+    login as <span></span>
+    <Link
+      style={{ color: '#4e0eff', textDecoration: 'none', fontWeight: 'bold' }}
+      to="/admin/login"
+    >
+     admin
+    </Link>
+  </span>
+      
       
       
       </div>

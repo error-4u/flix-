@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
     if (admin) {
       const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });
       res.json({ message: 'Logged in successfully', token });
-      console.log("loggedIn")
+      console.log("admin loggedIn")
     } else {
       res.status(403).json({ message: 'Invalid username or password' });
     }
