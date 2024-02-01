@@ -57,10 +57,10 @@ export default function Appbar() {
           padding: 4,
           zIndex: 1
       }}>
-          <div style={{marginLeft: 10, cursor: "pointer"}} onClick={() => {
+          <div style={{marginLeft: 10, cursor: "pointer", color:"white"}} onClick={() => {
               navigate("/")
           }}>
-              <Typography variant={"h6"}>Coursera</Typography>
+              <Typography variant={"h5"}>Coursera</Typography>
           </div>
   
           <div style={{display: "flex"}}>
@@ -96,10 +96,10 @@ export default function Appbar() {
           padding: 4,
           zIndex: 1
       }}>
-          <div style={{marginLeft: 10, cursor: "pointer"}} onClick={() => {
+          <div style={{marginLeft: 10, cursor: "pointer", color:"white"}} onClick={() => {
               navigate("/")
           }}>
-              <Typography variant={"h6"}>Coursera</Typography>
+              <Typography variant={"h5"}>Coursera</Typography>
           </div>
   
           <div style={{display: "flex"}}>

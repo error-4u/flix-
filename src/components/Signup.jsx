@@ -29,7 +29,7 @@ function Signup() {
     let data = res.data;
     localStorage.setItem("token", data.token)
     setUser({userEmail: email, isLoading: false})
-     navigate('/courses')
+     navigate('/user/courses')
 }
   return <div style={{
     height:"100vh",
