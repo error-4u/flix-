@@ -2,6 +2,7 @@
 import { Typography } from '@mui/material'
 import React from 'react'
 import "./css/landing.css"
+import Banner from './Style-Components/Banner'
 
 function Landing() {
   return (
@@ -57,8 +58,8 @@ function Landing() {
 <div className="col-md-6 heading-section d-flex align-items-center"
          >
       <div className="mt-0 my-lg-5 py-5">
-        <span className="subheading">Learn Anything</span>
-        <h2 className="mb-2">Benefits About Online Learning Expertise</h2>
+        <span className="subheading">LEARN ANYTHING</span>
+        <h2 className="mb-2">Benefits About Online <br /> Learning Expertise</h2>
         <div className="row mt-4 g-lg-2">
           <div className="col-lg-12 d-flex align-items-stretch services-wrap">
             <div className="services d-flex">
@@ -106,8 +107,6 @@ function Landing() {
       </div>
     </div>
     </div>
-
-    
 
    
     </div>

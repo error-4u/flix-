@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     animation: fade-up 1000ms ease-in-out;
-    margin-right: 100px;
+    margin-right: 200px;
   }
   
   /* Subheading Styles */
@@ -13,7 +13,8 @@
     display: block;
     margin-top: 0px;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 24px;
+    color:#4e0eff
   }
   
   /* Heading Styles */
@@ -67,3 +68,4 @@
     }
   }
   
+ 
