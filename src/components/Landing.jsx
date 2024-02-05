@@ -2,7 +2,7 @@
 import { Typography } from '@mui/material'
 import React from 'react'
 import "./css/landing.css"
-import Banner from './Style-Components/Banner'
+
 
 function Landing() {
   return (
