@@ -39,7 +39,7 @@ function Courses() {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", backgroundColor:"#131324" }}>
       {courses && courses.map(course => (
         <Course course={course} />
       ))}
@@ -51,9 +51,9 @@ export function Course({ course }) {
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ maxWidth: 345, marginTop: "20px", backgroundColor: "yellow", marginLeft: "10px" }}>
+    <Card sx={{ marginTop: "20px", backgroundColor: "whitesmoke", marginLeft: "10px",border: '0.1rem solid #4e0eff' }}>
       <CardMedia
-        sx={{ height: 140, backgroundColor: "red" }}
+        sx={{ height: 140, backgroundColor: "#00000076" }}
         image={course.price}
       />
       <CardContent>

@@ -39,7 +39,7 @@ function AdminCourses() {
   }, []);
 
   return (
-    <div style={{ key:"courses",isplay: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+    <div style={{ key:"courses",display: "flex", flexWrap: "wrap", justifyContent: "center", backgroundColor:"#131324" }}>
       {courses && courses.map(course => (
         <Course course={course} />
       ))}

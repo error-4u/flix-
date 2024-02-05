@@ -2,13 +2,14 @@
 /* eslint-disable no-undef */
 import express = require('express');
 
-
+import { configDotenv } from 'dotenv';
 import cors = require("cors");
 import mongoose from 'mongoose';
 
 import adminRouter from "./routes/admin";
 import userRouter from "./routes/user";
 
+configDotenv()
 const app = express();
 
 app.use(cors());

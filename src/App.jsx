@@ -37,7 +37,7 @@ function App() {
           <Route path='/login' element = {<Signin />}  />
           <Route path='/user/courses' element = {<Courses />} />
           <Route path='/admin/login' element = {<Admin />} />
-          <Route path='admin/course/:courseId' element = {<AdminCourse />} />
+          <Route path='/course/:courseId' element = {<AdminCourse />} />
           <Route path='/admin/courses' element = {<AdminCourses />} />
       </Routes>
 

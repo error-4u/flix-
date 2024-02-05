@@ -63,7 +63,7 @@ const courseLoading = useRecoilValue(isCourseLoading)
                 <UpdateCard />
             </Grid>
             <Grid item lg={4} md={12} sm={12}>
-                <CourseCard />
+                <UpdateCourse />
             </Grid>
         </Grid>
     </div>

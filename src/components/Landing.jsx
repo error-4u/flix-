@@ -32,12 +32,12 @@ function Landing() {
       <div  style={{marginTop:"50px", alignItems:"baseline"}}>
         <center>
         
-         <span style={{margin:"10px"}}><img src="src/assets/googel.png" alt="xyz" /></span>
-          <span style={{margin:"10px"}}><img src="src/assets/img.png" alt="xyz" /></span>
-           <span style={{margin:"10px"}}><img src="src/assets/landing.png" alt="xyz" /></span>
-            <span style={{margin:"10px"}}><img src="src/assets/ibm.png" alt="xyz" /></span>
-             <span style={{margin:"10px"}}><img src="src/assets/stanford.png" alt="xyz" /></span>
-            <span style={{margin:"10px"}}><img src="src/assets/msft.webp" alt="xyz" height={30} /></span> 
+         <span style={{margin:"10px", padding:"10px"}}><img src="src/assets/googel.png" alt="xyz" /></span>
+          <span style={{margin:"10px", padding:"1rem"}}><img src="src/assets/img.png" alt="xyz" /></span>
+           <span style={{margin:"10px", padding:"1rem"}}><img src="src/assets/landing.png" alt="xyz" /></span>
+            <span style={{margin:"10px", padding:"1rem"}}><img src="src/assets/ibm.png" alt="xyz" /></span>
+             <span style={{margin:"10px", padding:"1rem"}}><img src="src/assets/stanford.png" alt="xyz" /></span>
+            <span style={{margin:"10px", padding:"1rem"}}><img src="src/assets/msft.webp" alt="xyz" height={30} /></span> 
           </center>
       </div>
       </div>
@@ -68,7 +68,7 @@ function Landing() {
               </div>
               <div className="text">
                 <h2>Online Courses</h2>
-                <p style={{ marginBottom: 0 }}>
+                <p style={{ marginBottom: 0, opacity:'0.9' }}>
                   Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
                   there live the blind texts.
                 </p>
@@ -82,7 +82,7 @@ function Landing() {
               </div>
               <div className="text">
                 <h2>Earn A Certificates</h2>
-                <p style={{ marginBottom: 0 }}>
+                <p style={{ marginBottom: 0,opacity:'0.9' }}>
                   Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
                   there live the blind texts.
                 </p>
@@ -96,7 +96,7 @@ function Landing() {
               </div>
               <div className="text">
                 <h2>Learn with Expert</h2>
-                <p style={{ marginBottom: 0 }}>
+                <p style={{ marginBottom: 0 ,opacity:'0.9'}}>
                   Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
                   there live the blind texts.
                 </p>
