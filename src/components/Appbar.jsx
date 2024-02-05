@@ -60,7 +60,7 @@ export default function Appbar() {
           <div style={{marginLeft: 10, cursor: "pointer", color:"white"}} onClick={() => {
               navigate("/")
           }}>
-              <Typography variant={"h5"}>Coursera</Typography>
+              <Typography variant={"h5"}>Flix</Typography>
           </div>
   
           <div style={{display: "flex"}}>
@@ -68,15 +68,23 @@ export default function Appbar() {
            
 
                   <div style={{marginRight: 10}}>
-                      <Button
+                      <Button variant='contained' style={{  backgroundColor: '#4e0eff',
+                            color: 'white',}}
+
                           onClick={() => {
                               navigate("/user/courses")
                           }}
                       >Courses</Button>
+                      
                   </div>
 
                   <Button
                       variant={"contained"}
+
+                      style={{  backgroundColor: '#4e0eff',
+                            color: 'white',}}
+
+                            
                       onClick={() => {
                           localStorage.setItem("token", null);
                           setUser({
@@ -99,12 +107,15 @@ export default function Appbar() {
           <div style={{marginLeft: 10, cursor: "pointer", color:"white"}} onClick={() => {
               navigate("/")
           }}>
-              <Typography variant={"h5"}>Coursera</Typography>
+              <Typography variant={"h4"}>Flix-</Typography>
           </div>
   
           <div style={{display: "flex"}}>
               <div style={{marginRight: 10}}>
                   <Button
+
+              style={{  backgroundColor: "#4e0eff",
+              color: 'white',}}
                       variant={"contained"}
                       onClick={() => {
                           navigate("/signup")
@@ -113,6 +124,9 @@ export default function Appbar() {
               </div>
               <div>
                   <Button
+                        style={{  backgroundColor: '#4e0eff',
+                        color: 'white',}}
+
                       variant={"contained"}
                       onClick={() => {
                           navigate("/login")
