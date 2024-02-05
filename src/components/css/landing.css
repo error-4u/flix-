@@ -24,6 +24,8 @@
     font-weight: 500;
     line-height: 1.4;
     margin-top: 0px;
+    margin-right: 50px;
+    white-space: nowrap;
   }
   
   /* Row Styles */
