@@ -18,6 +18,7 @@ import React from 'react'
 import AdminAppbar from './components/Admin/AdminLogin'
 import Admin from './components/Admin/AdminLogin'
 import AdminCourses from './components/Admin/AdminCourses'
+import MyChartComponent from './components/Admin/Statics'
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
           <Route path='/admin/login' element = {<Admin />} />
           <Route path='/course/:courseId' element = {<AdminCourse />} />
           <Route path='/admin/courses' element = {<AdminCourses />} />
+          <Route path='/admin/statistic' element = {<MyChartComponent />} />
       </Routes>
 
     </Router>

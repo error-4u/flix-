@@ -83,9 +83,9 @@ function Admin() {
 
   >
 
-<img style={{ height: '5rem' }} src="../assets/eren.jpg" alt="logo" />
+<img style={{ height: '5rem' }} src="../src/assets/book.png" alt="logo" />
     <h1 style={{ color: 'white', textTransform: 'uppercase' }}>Flix</h1>
-    <h1 style={{ color: 'white', textTransform: 'uppercase' }}>Admin login</h1>
+    <h1 style={{ color: '#4e0eff', textTransform: 'uppercase' }}>Admin login</h1>
     </div>
     <input
     style={{

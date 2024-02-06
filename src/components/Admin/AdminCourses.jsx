@@ -13,11 +13,13 @@ import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import MyChartComponent from './Statics';
 
 // THIS WILL GET ALL THE COURSES 
 
 function AdminCourses() {
   const [courses, setCourses] = useState([]);
+  const navigate = useNavigate()
    
   const init = async () => {
  
@@ -26,7 +28,7 @@ function AdminCourses() {
       res.json().then(callback2);
     }
 
-    const response = await axios.get("http://localhost:3000/user/courses", {
+    const response = await axios.get("http://localhost:3000/admin/courses", {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("token")
       }
@@ -38,11 +40,23 @@ function AdminCourses() {
   init();
   }, []);
 
+  
+
   return (
-    <div style={{ key:"courses",display: "flex", flexWrap: "wrap", justifyContent: "center", backgroundColor:"#131324" }}>
+    <div>
+      <center>
+      <span style={{alignItems:"center", justifyContent:"center", background:"#4e0eff", padding:"0.5rem",}}><Button 
+      onClick={() => navigate("/admin/statistic")}
+      style={{color:"whitesmoke"}}>Show Statistic
+      
+      </Button></span>
+      </center>
+    <div style={{ key:"courses",display: "flex", flexWrap: "wrap", justifyContent: "center", backgroundColor:"#131324" }} key={"wd"}>
       {courses && courses.map(course => (
         <Course course={course} />
-      ))}
+       ))}
+    </div>
+  
     </div>
   );
 }
@@ -51,7 +65,7 @@ export function Course({ course }) {
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ maxWidth: 345, marginTop: "20px", backgroundColor: "yellow", marginLeft: "10px" }}>
+    <Card sx={{ maxWidth: 345, marginTop: "100px", backgroundColor: "yellow", marginLeft: "10px"}}>
       <CardMedia
         sx={{ height: 140, backgroundColor: "red" }}
         image={course.price}
