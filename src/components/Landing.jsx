@@ -18,7 +18,7 @@ function Landing() {
       </div>
      
       <div class="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-      <img src="src/assets/girl.webp" alt="eren" height={800} style={{width:"100%", borderRadius:"20px"}} />
+      <img src="/girl.webp" alt="eren" height={800} style={{width:"100%", borderRadius:"20px"}} />
       </div>
      <div>
       
@@ -32,18 +32,18 @@ function Landing() {
       <div  style={{marginTop:"50px", alignItems:"baseline"}}>
         <center>
         
-         <span style={{margin:"10px", padding:"10px"}}><img src="src/assets/googel.png" alt="xyz" /></span>
-          <span style={{margin:"10px", padding:"1rem"}}><img src="src/assets/img.png" alt="xyz" /></span>
-           <span style={{margin:"10px", padding:"1rem"}}><img src="src/assets/landing.png" alt="xyz" /></span>
-            <span style={{margin:"10px", padding:"1rem"}}><img src="src/assets/ibm.png" alt="xyz" /></span>
-             <span style={{margin:"10px", padding:"1rem"}}><img src="src/assets/stanford.png" alt="xyz" /></span>
-            <span style={{margin:"10px", padding:"1rem"}}><img src="src/assets/msft.webp" alt="xyz" height={30} /></span> 
+         <span style={{margin:"10px", padding:"10px"}}><img src="/googel.png" alt="xyz" /></span>
+          <span style={{margin:"10px", padding:"1rem"}}><img src="/img.png" alt="xyz" /></span>
+           <span style={{margin:"10px", padding:"1rem"}}><img src="/landing.png" alt="xyz" /></span>
+            <span style={{margin:"10px", padding:"1rem"}}><img src="/ibm.png" alt="xyz" /></span>
+             <span style={{margin:"10px", padding:"1rem"}}><img src="/stanford.png" alt="xyz" /></span>
+            <span style={{margin:"10px", padding:"1rem"}}><img src="/msft.webp" alt="xyz" height={30} /></span> 
           </center>
       </div>
       </div>
       <div style={{display:"flex", marginTop:"80px", justifyContent:"space-around", alignContent:"center"}}>
         
-      <img src="src/assets/sitting_girl.webp" alt="" srcset="" style={{height:"1000px", width:"100%", marginLeft:"0", paddingLeft:"0px"}}/>
+      <img src="/sitting_girl.webp" alt="" srcset="" style={{height:"1000px", width:"100%", marginLeft:"0", paddingLeft:"0px"}}/>
       {/* <div style={{minWidth:"1000px"}}>
        
       <div style={{fontSize:"46px", fontWeight:"500", lineHeight:"1,4", padding:"20px"}}>
