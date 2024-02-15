@@ -2,7 +2,7 @@
 import { Typography } from '@mui/material'
 import React from 'react'
 import "./css/landing.css"
-
+import Footer from './Footer'
 
 function Landing() {
   return (
@@ -108,7 +108,7 @@ function Landing() {
     </div>
     </div>
 
-   
+    <Footer/>
     </div>
   )
 }
