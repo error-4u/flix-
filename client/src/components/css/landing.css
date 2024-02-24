@@ -1,73 +1,75 @@
 /* styles.css */
+/* styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Container Styles */
 .col-md-6.heading-section {
-    display: flex;
-    align-items: center;
-    animation: fade-up 1000ms ease-in-out;
-    margin-right: 200px;
+  display: flex;
+  align-items: center;
+  animation: fade-up 1000ms ease-in-out;
+  margin-right: 200px;
+}
+
+/* Subheading Styles */
+.subheading {
+  display: block;
+  margin-top: 0px;
+  font-weight: 700;
+  font-size: 24px;
+  color: #4e0eff;
+}
+
+/* Heading Styles */
+.mb-2 {
+  margin-bottom: 20px;
+  font-size: 50px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-top: 0px;
+  margin-right: 50px;
+  white-space: nowrap;
+}
+
+/* Row Styles */
+.row {
+  margin-top: 20px;
+  gap: 20px;
+}
+
+/* Services Wrap Styles */
+.col-lg-12.d-flex.align-items-stretch.services-wrap {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Services Styles */
+.services {
+  display: flex;
+}
+
+/* Icon Styles */
+.icon {
+  margin-right: 10px;
+}
+
+/* Text Styles */
+.text {
+  flex-grow: 1;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+/* Animation Styles */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  /* Subheading Styles */
-  .subheading {
-    display: block;
-    margin-top: 0px;
-    font-weight: 700;
-    font-size: 24px;
-    color:#4e0eff
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Heading Styles */
-  .mb-2 {
-    margin-bottom: 20px;
-    font-size: 50px;
-    font-weight: 500;
-    line-height: 1.4;
-    margin-top: 0px;
-    margin-right: 50px;
-    white-space: nowrap;
-  }
-  
-  /* Row Styles */
-  .row {
-    margin-top: 20px;
-    gap: 20px;
-  }
-  
-  /* Services Wrap Styles */
-  .col-lg-12.d-flex.align-items-stretch.services-wrap {
-    display: flex;
-    align-items: stretch;
-  }
-  
-  /* Services Styles */
-  .services {
-    display: flex;
-  }
-  
-  /* Icon Styles */
-  .icon {
-    margin-right: 10px;
-  }
-  
-  /* Text Styles */
-  .text {
-    flex-grow: 1;
-    font-size: 20px;
-    font-weight: 500;
-    font-family: "Roboto", Arial, sans-serif;
-  }
-  
-  /* Animation Styles */
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
- 
+}
