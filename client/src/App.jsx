@@ -23,7 +23,12 @@ import MyChartComponent from "./components/Admin/Statics";
 function App() {
   return (
     <div
-      style={{ height: "100vh", width: "100vw", backgroundColor: "#131324" }}
+      style={{
+        height: "100vh",
+        width: "100vw",
+        backgroundColor: "#131324",
+        overflowX: "hidden",
+      }}
     >
       <RecoilRoot>
         <Router>

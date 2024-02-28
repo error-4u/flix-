@@ -7,6 +7,8 @@ import CoreFeatures from "./CoreFeatures";
 import BrowseCourse from "../pages/BrowseCourse";
 import Instructor from "../pages/Instructor";
 import PopularCourses from "../pages/PopularCourses";
+import Register from "../pages/Register";
+import Slider2 from "../pages/Slider2";
 
 function Landing() {
   return (
@@ -21,6 +23,7 @@ function Landing() {
           borderRadius: "20px",
           marginTop: "30px",
           fontFamily: "monospace",
+          position: "relative",
         }}
       >
         <div
@@ -113,7 +116,17 @@ function Landing() {
       </div>
       <div>
         <center>
-          <Instructor className="items-center justify-center" />
+          <Instructor />
+        </center>
+      </div>
+      <div>
+        <center>
+          <Register />
+        </center>
+      </div>
+      <div>
+        <center>
+          <Slider2 />
         </center>
       </div>
       <div

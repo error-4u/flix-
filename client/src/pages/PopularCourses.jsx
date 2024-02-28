@@ -3,11 +3,11 @@ import React from "react";
 function PopularCourses() {
   return (
     <div>
-      <div className="relative md:py-24 py-16 overflow-hidden border border-emerald-500">
+      <div className="relative md:py-24 py-16 overflow-hidden">
         <div className="container relative">
           <div className="grid grid-rows-2 ">
             <h3 className="text-3xl">Popular Courses</h3>
-            <p className="text-slate-800">
+            <p className="text-slate-800 text-left">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente
               molestiae quia quam provident laboriosam iusto magnam fugit autem
               dolores, nesciunt nostrum odit blanditiis ab ratione! Incidunt
