@@ -1,6 +1,8 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
   return (
     <div>
       <section
@@ -18,11 +20,13 @@ function Register() {
                 Launch your campaign and benefit from our expertise on designing
                 and managing conversion centered Tailwind CSS v3.x html page.
               </p>
-              <div class="relative mt-10">
-                <a
-                  class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md"
-                  href="/index-course"
-                >
+              <div
+                class="relative mt-10 cursor-pointer"
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                <a class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md">
                   Admission Now
                 </a>
               </div>
@@ -32,7 +36,7 @@ function Register() {
                 <h4 class="mb-5 text-2xl font-semibold">Register Now</h4>
                 <form>
                   <div class="grid grid-cols-1">
-                    <div class="mb-5">
+                    <div class="mb-5 text-left">
                       <label class="form-label font-medium">
                         Your Name : <span class="text-red-600">*</span>
                       </label>
@@ -61,7 +65,7 @@ function Register() {
                         />
                       </div>
                     </div>
-                    <div class="mb-5">
+                    <div class="mb-5 text-left">
                       <label class="form-label font-medium">
                         Your Email : <span class="text-red-600">*</span>
                       </label>
@@ -90,8 +94,8 @@ function Register() {
                         />
                       </div>
                     </div>
-                    <div class="mb-5">
-                      <label class="form-label font-medium">
+                    <div class="mb-5 text-left">
+                      <label class="form-label font-medium ">
                         Phone No. : <span class="text-red-600">*</span>
                       </label>
                       <div class="form-icon relative mt-2">

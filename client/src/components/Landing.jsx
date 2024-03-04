@@ -13,48 +13,49 @@ import Slider2 from "../pages/Slider2";
 function Landing() {
   return (
     <div>
-      <div
-        className="flex flex-col lg:text-sm md:flex"
-        style={{
-          backgroundColor: "green",
-          display: "flex",
-          margin: "10px",
-          justifyContent: "space-between",
-          borderRadius: "20px",
-          marginTop: "30px",
-          fontFamily: "monospace",
-          position: "relative",
-        }}
-      >
+      <div className="relative bg-darktext ">
         <div
+          className="flex flex-col lg:text-sm md:flex"
           style={{
-            position: "absolute",
-            color: "#4e0eff",
-            marginTop: "200px",
-            marginLeft: "40px",
+            display: "flex",
+            margin: "10px",
+            justifyContent: "space-between",
+            borderRadius: "20px",
+            marginTop: "30px",
+            fontFamily: "monospace",
+            position: "relative",
           }}
         >
-          <span style={{ textTransform: "uppercase", fontSize: "2.7rem" }}>
-            <span className="text-black"> Welcome to </span> coursea
-          </span>
-          <Typography>
-            <h1
-              className="text-black"
-              style={{ marginTop: "3px", fontSize: "1.4rem" }}
-            >
-              Best Online Education Expertise
-            </h1>
-          </Typography>
-          <span
-            className="text-sm mt-5 text-indigo-700"
-            style={{ marginTop: "1rem" }}
+          <div
+            style={{
+              position: "absolute",
+              color: "#4e0eff",
+              marginTop: "200px",
+              marginLeft: "40px",
+            }}
           >
-            Far far away, behind the word mountains, far from the countries
-            Vokalia and <br /> Consonantia, there live the blind texts.
-          </span>
+            <span style={{ textTransform: "uppercase", fontSize: "2.7rem" }}>
+              <span className="text-black"> Welcome to </span> coursea
+            </span>
+            <Typography>
+              <h1
+                className="text-black"
+                style={{ marginTop: "3px", fontSize: "1.4rem" }}
+              >
+                Best Online Education Expertise
+              </h1>
+            </Typography>
+            <span
+              className="text-sm mt-5 text-indigo-700"
+              style={{ marginTop: "1rem" }}
+            >
+              Far far away, behind the word mountains, far from the countries
+              Vokalia and <br /> Consonantia, there live the blind texts.
+            </span>
+          </div>
         </div>
 
-        <div class="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
+        <div class="absolute mt-10 inset-0 -z-10 h-full w-full items-center px-5 py-24 bg-darktext"></div>
         <img
           src="/girl.webp"
           alt="eren"
@@ -116,7 +117,7 @@ function Landing() {
       </div>
       <div>
         <center>
-          <Instructor />
+          <Slider2 />
         </center>
       </div>
       <div>
@@ -124,9 +125,9 @@ function Landing() {
           <Register />
         </center>
       </div>
-      <div>
+      <div className="mt-20">
         <center>
-          <Slider2 />
+          <Instructor />
         </center>
       </div>
       <div

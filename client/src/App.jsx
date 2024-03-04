@@ -24,9 +24,9 @@ function App() {
   return (
     <div
       style={{
-        height: "100vh",
-        width: "100vw",
-        backgroundColor: "#131324",
+        // height: "100vh",
+        // width: "100vw",
+        // backgroundColor: "#131324",
         overflowX: "hidden",
       }}
     >

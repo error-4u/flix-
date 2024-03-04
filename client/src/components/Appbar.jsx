@@ -108,7 +108,7 @@ export default function Appbar() {
       >
         <div
           className="mt-2 p-1"
-          style={{ marginLeft: 10, cursor: "pointer", color: "white" }}
+          style={{ marginLeft: 10, cursor: "pointer", color: "black" }}
           onClick={() => {
             navigate("/");
           }}

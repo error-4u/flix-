@@ -73,3 +73,6 @@
     transform: translateY(0);
   }
 }
+.slick-slide > div {
+  margin: 0 7px;
+}

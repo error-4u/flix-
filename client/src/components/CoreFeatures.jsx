@@ -5,13 +5,20 @@ function CoreFeatures() {
     <div>
       <section className="relative md:py-24 py-16 overflow-hidden">
         <div className="container relative">
-          <div className=" ml-20 pb-8 text-center items-center justify-center text-blue-900">
-            <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold text-center items-center">
+          <div className=" pb-4 text-center items-center justify-center text-black">
+            <h3 className=" mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold text-left items-center">
               Core Features
             </h3>
-            <p className="text-slate-700 max-w-xl mx-auto">
-              Start working with Tailwind CSS that can provide everything you
-              need to generate awareness, drive traffic, connect.
+            <p className="text-slate-700 text-left">
+              <ul>
+                <li>
+                  Far far away, behind the word mountains, far from the
+                  countries Vokalia and Consonantia, there live the blind texts.
+                  Far far away, behind the word mountains, far from the
+                  countries Vokalia and Consonantia, there live the blind texts.
+                  Learn with Expert
+                </li>
+              </ul>
             </p>
           </div>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
