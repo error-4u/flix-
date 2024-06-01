@@ -1,5 +1,3 @@
-
-
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -7,22 +5,14 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import MyChartComponent from "./Statics";
-// import AddCourses from "../Admin/AddCourses";
-
-// THIS WILL GET ALL THE COURSES
 
 function AdminCourses() {
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
 
   const init = async () => {
-    // function callback1(res) {
-    //   res.json().then(callback2);
-    // }
-
     const response = await axios.get("http://localhost:3000/admin/courses", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -36,46 +26,37 @@ function AdminCourses() {
   }, []);
 
   return (
-    <div>
+    <div style={{ padding: "20px", backgroundColor: "#f4f6f8" }}>
       <center>
-        <span
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#4e0eff",
-            padding: "0.5rem",
-          }}
-        >
+        <div style={{ marginBottom: "20px" }}>
           <Button
+            variant="contained"
+            style={{ backgroundColor: "#4e0eff", color: "whitesmoke" }}
             onClick={() => navigate("/admin/statistic")}
-            style={{ color: "whitesmoke" }}
           >
             Show Statistic
           </Button>
-        </span>
-        <div>
           <Button
             variant="contained"
-            style={{ padding: "0.5rem", background: "#4e0eff" }}
-            onClick={() => {
-              navigate("/admin/addcourses");
-            }}
+            style={{ marginLeft: "10px", backgroundColor: "#4e0eff", color: "whitesmoke" }}
+            onClick={() => navigate("/admin/addcourses")}
           >
-            AddCourse
+            Add Course
           </Button>
         </div>
       </center>
       <div
         style={{
-          key: "courses",
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
+          gap: "20px",
           backgroundColor: "#131324",
+          padding: "20px",
+          borderRadius: "8px",
         }}
-        key={"wd"}
       >
-        {courses && courses.map((course) => <Course course={course} />)}
+        {courses && courses.map((course) => <Course key={course._id} course={course} />)}
       </div>
     </div>
   );
@@ -83,50 +64,50 @@ function AdminCourses() {
 
 export function Course({ course }) {
   const navigate = useNavigate();
-  console.log(course)
 
   return (
     <Card
       sx={{
         maxWidth: 345,
-        marginTop: "100px",
-        backgroundColor: "yellow",
-        marginLeft: "10px",
+        backgroundColor: "#fff",
+        boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+        borderRadius: "8px",
+        overflow: "hidden",
+        transition: "transform 0.2s",
+        "&:hover": {
+          transform: "scale(1.05)",
+        },
       }}
     >
       <CardMedia
-        sx={{ height: 140, backgroundColor: "white" }}
-        image={course.image}
+        sx={{ height: 140 }}
+        image={course.image || "path/to/default/image.jpg"}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div" style={{ color: "#333" }}>
           {course.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          <br />
+        <Typography variant="body2" color="text.secondary" style={{ marginTop: "10px" }}>
           {course.description}
-          <br />
         </Typography>
       </CardContent>
       <CardActions>
         <Button
           size="small"
-          onClick={() => {
-            navigate("/course/" + course._id);
-          }}
+          style={{ color: "#4e0eff" }}
+          onClick={() => navigate("/course/" + course._id)}
         >
           Edit
         </Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small" style={{ color: "#4e0eff" }}>
+          Learn More
+        </Button>
       </CardActions>
     </Card>
-
   );
 }
 
 export default AdminCourses;
-
-
 
 
 
