@@ -73,13 +73,13 @@ export default function AdminAppbar() {
                       >Add course</Button>
                   </div>
 
-                  <div style={{marginRight: 10}}>
+                  {/* <div style={{marginRight: 10}}>
                       <Button
                           onClick={() => {
                               navigate("/admin/courses")
                           }}
                       >Courses</Button>
-                  </div>
+                  </div> */}
 
                   <Button
                       variant={"contained"}

@@ -21,6 +21,9 @@ import AdminCourses from "./components/Admin/AdminCourses";
 import MyChartComponent from "./components/Admin/Statics";
 
 function App() {
+  // useEffect(() => {
+  //   InitUser()
+  // })
   return (
     <div
       style={{

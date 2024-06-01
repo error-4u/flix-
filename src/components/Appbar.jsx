@@ -61,12 +61,15 @@ export default function Appbar() {
             navigate("/");
           }}
         >
-          <Typography variant={"h5"}>Flix</Typography>
+          <Typography variant={"h5"} style={{ color: "black" }}>Flix</Typography>
         </div>
 
         <div style={{ display: "flex" }}>
           <div style={{ marginRight: 10, display: "flex" }}>
             <div style={{ marginRight: 10 }}>
+              <Button>
+                {userEmail}
+              </Button>
               <Button
                 variant="contained"
                 style={{ backgroundColor: "#4e0eff", color: "white" }}
