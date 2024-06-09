@@ -12,7 +12,12 @@ import userRouter from "./routes/user";
 configDotenv();
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use("/admin", adminRouter);

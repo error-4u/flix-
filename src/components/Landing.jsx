@@ -115,11 +115,11 @@ function Landing() {
           <PopularCourses />
         </center>
       </div>
-      <div>
+      {/* <div>
         <center>
           <Slider2 />
         </center>
-      </div>
+      </div> */}
       <div>
         <center>
           <Register />
